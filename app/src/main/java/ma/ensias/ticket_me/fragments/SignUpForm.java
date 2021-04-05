@@ -1,6 +1,7 @@
 package ma.ensias.ticket_me.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,12 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import ma.ensias.ticket_me.R;
+import ma.ensias.ticket_me.model.User;
+import ma.ensias.ticket_me.requests.APIClient;
+import ma.ensias.ticket_me.requests.APIInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class SignUpForm extends Fragment {
@@ -39,6 +46,35 @@ public class SignUpForm extends Fragment {
                                     || !passwordText.equals(passwordConfirmationText))
             {
                 Toast.makeText(getActivity(),"Les donnes entrez sont errone",Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                APIInterface apiInterface = APIClient.createService(APIInterface.class);
+                Call<User> call = apiInterface.signUp(loginText,passwordText);
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        if(response.isSuccessful())
+                        {
+                            if(response.body() != null)
+                            {
+                                Toast.makeText(getActivity(),"User created",Toast.LENGTH_LONG).show();
+                            }
+                            else
+                                Toast.makeText(getActivity(),"User creation failed",Toast.LENGTH_LONG).show();
+                        }
+                        else
+                            Log.e("signup message", response.message());
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t)
+                    {
+                        Log.e("signup failure", t.getMessage());
+                    }
+                });
+
             }
         });
 
