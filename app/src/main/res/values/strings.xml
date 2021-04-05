@@ -2,18 +2,16 @@
     <string name="app_name">Ticket-me</string>
     <string name="welcome"> Bienvenue sur Ticket-me </string>
     <string name="Login">Log in</string>
-    <string name="login_login_hint">Login</string>
+    <string name="login_username_hint">Username</string>
     <string name="login_password_hint">Password</string>
     <string name="Login_signup">Sign Up</string>
     <string name="Login_login">Log in</string>
-    <string name="Description_image">Content description</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="description_image">Content description</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_signup">Sign Up</string>
     <string name="button_signup">Sign up</string>
     <string name="button_login">Log in</string>
-    <string name="Login_hint">Pseudo</string>
-    <string name="login_password_confirmation_hint">Password Confirmation</string>
+    <string name="signup_password_confirmation_hint">Password Confirmation</string>
     <string name="creer_nouveau_compte">Vous n\'avez pas un compte ? Creer votre compte</string>
 
 </resources>

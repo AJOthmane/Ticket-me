@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import ma.ensias.ticket_me.R;
 import ma.ensias.ticket_me.model.User;
 import ma.ensias.ticket_me.requests.APIClient;
@@ -22,7 +24,9 @@ import retrofit2.Response;
 
 public class SignUpForm extends Fragment {
 
-    EditText login;
+    private static int PASSWORD_MIN_LENGTH = 6;
+
+    EditText username;
     EditText password;
     EditText passwordConfirmation;
     Button signUpButton;
@@ -34,23 +38,35 @@ public class SignUpForm extends Fragment {
         View signUpView = inflater.inflate(R.layout.signup_fragment, container, false);
 
         signUpButton = signUpView.findViewById(R.id.signup_button);
-        login =  signUpView.findViewById(R.id.signup_login);
+        username =  signUpView.findViewById(R.id.signup_username);
         password =  signUpView.findViewById(R.id.signup_password);
         passwordConfirmation = signUpView.findViewById(R.id.signup_password_confirmation);
 
         signUpButton.setOnClickListener( v -> {
-            String loginText = login.getText().toString();
+            String usernameText = username.getText().toString();
             String passwordText = password.getText().toString();
             String passwordConfirmationText = passwordConfirmation.getText().toString();
-            if(loginText.isEmpty() || passwordText.isEmpty() || passwordConfirmationText.isEmpty()
-                                    || !passwordText.equals(passwordConfirmationText))
+
+            if(usernameText.isEmpty() || passwordText.isEmpty() || passwordConfirmationText.isEmpty() )
             {
-                Toast.makeText(getActivity(),"Les donnes entrez sont errone",Toast.LENGTH_LONG).show();
+               //Toast.makeText(getContext(),"Veuillez remplir tous les champs",Toast.LENGTH_LONG).show();
+                Snackbar.make(getView(),"Veuillez remplir tous les champs",Snackbar.LENGTH_LONG).show();
+
+            }
+            else if(!passwordText.equals(passwordConfirmationText))
+            {
+               //Toast.makeText(getActivity(),"Le mote de passe et confirmation ne sont pas identiques",Toast.LENGTH_LONG).show();
+                Snackbar.make(getView(),"Le mote de passe et confirmation ne sont pas identiques",Snackbar.LENGTH_LONG).show();
+            }
+            else if (passwordText.length() <= PASSWORD_MIN_LENGTH)
+            {
+                //Toast.makeText(getActivity(),"Mot de passe doit contenir au minimum 6 caracteres",Toast.LENGTH_LONG).show();
+                Snackbar.make(getView(),"Mot de passe doit contenir au minimum 6 caracteres",Snackbar.LENGTH_LONG).show();
             }
             else
             {
                 APIInterface apiInterface = APIClient.createService(APIInterface.class);
-                Call<User> call = apiInterface.signUp(loginText,passwordText);
+                Call<User> call = apiInterface.signUp(usernameText,passwordText);
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
@@ -58,10 +74,13 @@ public class SignUpForm extends Fragment {
                         {
                             if(response.body() != null)
                             {
-                                Toast.makeText(getActivity(),"User created",Toast.LENGTH_LONG).show();
+
+                                Snackbar.make(getView(),"Utilisateur est cree",Snackbar.LENGTH_LONG).show();
                             }
                             else
-                                Toast.makeText(getActivity(),"User creation failed",Toast.LENGTH_LONG).show();
+                                Snackbar.make(getView(),"Opps un erreur est servenue",Snackbar.LENGTH_LONG).show();
+                                //Toast.makeText(getActivity(),"Opps un erreur est servenue",Toast.LENGTH_LONG).show();
+
                         }
                         else
                             Log.e("signup message", response.message());
