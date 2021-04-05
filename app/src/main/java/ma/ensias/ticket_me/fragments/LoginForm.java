@@ -1,9 +1,7 @@
 package ma.ensias.ticket_me.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
 import ma.ensias.ticket_me.R;
+import ma.ensias.ticket_me.requests.APIClient;
+import ma.ensias.ticket_me.requests.APIInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class LoginForm extends Fragment {
@@ -43,6 +48,25 @@ public class LoginForm extends Fragment {
             }
             else
             {
+                APIInterface apiInterface = APIClient.createService(APIInterface.class);
+                Call<Boolean> call = apiInterface.VerifyLogin(loginText,passwordText);
+                call.enqueue(new Callback<Boolean>() {
+                    @Override
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                        if(response.isSuccessful())
+                        {
+                            if(response.body())
+                                Toast.makeText(getActivity(),"Username et mot de passe correct",Toast.LENGTH_LONG).show();
+                            else
+                                Toast.makeText(getActivity(),"Username et mot de passe incorrect",Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Boolean> call, Throwable t) {
+                        Log.e("Fail : login",t.getMessage());
+                    }
+                });
 
             }
                 });
