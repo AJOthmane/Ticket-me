@@ -13,5 +13,11 @@
     <string name="button_login">Log in</string>
     <string name="signup_password_confirmation_hint">Password Confirmation</string>
     <string name="creer_nouveau_compte">Vous n\'avez pas un compte ? Creer votre compte</string>
+    <string name="create_event">Creation of event</string>
+    <string name="eventInfo">Basic Informations</string>
+    <string name="nameOfEvent">Name</string>
+    <string name="dateofevent">Date</string>
+    <string name="timeEvent">Time</string>
+    <string name="buttonCreationEvent_next">Next</string>
 
 </resources>

@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
     private void loadFragment(Fragment fragment)
     {
@@ -68,4 +70,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.fragmentLoginSignup, new LoginForm());
         fragmentTransaction.commit();
     }
+
+
 }

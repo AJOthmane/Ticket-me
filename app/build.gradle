@@ -47,5 +47,7 @@ dependencies {
     // Log for retrofit
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+    // For google api
+
 
 }
