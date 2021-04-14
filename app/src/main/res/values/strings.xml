@@ -19,5 +19,7 @@
     <string name="dateofevent">Date</string>
     <string name="timeEvent">Time</string>
     <string name="buttonCreationEvent_next">Next</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="header_maps">Chose the location of the event</string>
 
 </resources>

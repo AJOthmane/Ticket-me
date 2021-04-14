@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient {
 
-        public final static String URL_API = "https://module-valide.herokuapp.com/api/";
+        public final static String URL_API = "https://andserver.glitch.me/api/";
         private static Retrofit retrofit = null;
         private static Gson gson = new GsonBuilder().create();
 
@@ -31,6 +31,7 @@ public class APIClient {
         private static OkHttpClient okHttpClient = okHttpClientBuilder.build();
 
         public static <T> T createService(Class<T> serviceClass){
+                Gson gson = new GsonBuilder().setLenient().create();
                 if(retrofit == null){
                         retrofit = new Retrofit.Builder()
                                 .client(okHttpClient)
