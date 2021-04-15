@@ -1,6 +1,8 @@
 package ma.ensias.ticket_me.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -19,6 +21,7 @@ import android.widget.TimePicker;
 import com.google.android.material.snackbar.Snackbar;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -30,10 +33,8 @@ import ma.ensias.ticket_me.R;
 
 public class EventInfo extends Fragment {
 
-    private static final String CHAMP_CITY = "city";
-    private static final String CHAMP_STATE = "state";
-    private static final String CHAMP_COUNTRY = "country";
-    private static final String CHAMP_POSTAL_CODE = "postalcode";
+    public static final String NAME_OF_EVENT  = "nameOfEvent";
+    public static final String DATE_OF_EVENT  = "dateOfEvent";
 
     Button next ;
     EditText name;
@@ -49,6 +50,7 @@ public class EventInfo extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
     }
 
@@ -71,6 +73,8 @@ public class EventInfo extends Fragment {
                     datePicked.set(Calendar.YEAR,date.getYear());
                     datePicked.set(Calendar.MONTH,date.getMonth());
                     datePicked.set(Calendar.DAY_OF_MONTH,date.getDayOfMonth());
+                    datePicked.set(Calendar.HOUR,time.getHour()) ;
+                    datePicked.set(Calendar.MINUTE,time.getMinute()) ;
                     Calendar dateSys = Calendar.getInstance();
                     GregorianCalendar sysdate = new GregorianCalendar();
 
@@ -86,8 +90,9 @@ public class EventInfo extends Fragment {
                     else
                     {
                         Intent i = new Intent( (getActivity()), MapsActivity.class);
-                        i.putExtra("name",nameText);
-                        i.putExtra("date",datePicked);
+
+                        i.putExtra(NAME_OF_EVENT,nameText);
+                        i.putExtra(DATE_OF_EVENT,datePicked.toString());
                         startActivity(i);
 
                     }
@@ -98,4 +103,11 @@ public class EventInfo extends Fragment {
 
         return infoView;
     }
+    public String transformDate(Calendar gc)
+    {
+        SimpleDateFormat fmt = new SimpleDateFormat("\"yyyy-MM-dd HH:mm \"");
+        fmt.setCalendar(gc);
+        return fmt.format(gc.getTime());
+    }
+
 }

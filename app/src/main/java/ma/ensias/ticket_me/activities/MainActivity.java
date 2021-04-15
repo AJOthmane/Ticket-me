@@ -17,6 +17,9 @@ import ma.ensias.ticket_me.fragments.SignUpForm;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String USERNAME_FIELD = "username";
+    public static final String PASSWORD_FIELD = "password";
+
     EditText login;
     EditText password;
     TextView createAccount;

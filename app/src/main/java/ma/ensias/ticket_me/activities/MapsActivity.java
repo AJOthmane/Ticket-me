@@ -1,9 +1,9 @@
 package ma.ensias.ticket_me.activities;
 
+import android.content.Intent;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.Locale;
 
 import ma.ensias.ticket_me.R;
+import ma.ensias.ticket_me.fragments.EventInfo;
 
 /*
     TODO LIST :
@@ -38,7 +39,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private MarkerOptions marker;
     android.location.Address address;
     String addressString = "";
-
+    String nameOfEvent;
+    String datePicked;
 
 
     @Override
@@ -49,7 +51,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
-
+        Intent intent = getIntent();
+        nameOfEvent = intent.getStringExtra(EventInfo.NAME_OF_EVENT);
+        datePicked = intent.getStringExtra(EventInfo.DATE_OF_EVENT);
         mapFragment.getMapAsync(this);
         button = findViewById(R.id.buttonmap);
         Snackbar.make(button,"Appuyez de manière prolongée sur le repère pour activer le déplacement",Snackbar.LENGTH_LONG).show();
@@ -57,6 +61,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
             Snackbar.make(v,"Adresse : "+addressString,Snackbar.LENGTH_LONG).show();
+            
+            /*
+                Complete the call of api and sent
+             */
+
+
 
 
         });

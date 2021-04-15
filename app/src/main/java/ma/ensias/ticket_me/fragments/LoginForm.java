@@ -1,5 +1,8 @@
 package ma.ensias.ticket_me.fragments;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +18,8 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.HashMap;
 
 import ma.ensias.ticket_me.R;
+import ma.ensias.ticket_me.activities.CreationEvent;
+import ma.ensias.ticket_me.activities.MainActivity;
 import ma.ensias.ticket_me.requests.APIClient;
 import ma.ensias.ticket_me.requests.APIInterface;
 import ma.ensias.ticket_me.forms.ReponseLogin;
@@ -24,6 +29,10 @@ import retrofit2.Response;
 
 
 public class LoginForm extends Fragment {
+
+    public static final String SESSION_SP_NAME = "LoginForm";
+    public static final String ID_SESSION = "ID_SESSION";
+
 
     EditText username;
     EditText password;
@@ -53,19 +62,24 @@ public class LoginForm extends Fragment {
             {
                 APIInterface apiInterface = APIClient.createService(APIInterface.class);
                 HashMap<String,String> cred = new HashMap<>();
-                cred.put("username",usernameText);
-                cred.put("password",passwordText);
+                cred.put(MainActivity.USERNAME_FIELD,usernameText);
+                cred.put(MainActivity.PASSWORD_FIELD,passwordText);
                 Call<ReponseLogin> call = apiInterface.VerifyLogin(cred);
                 call.enqueue(new Callback<ReponseLogin>() {
                     @Override
                     public void onResponse(Call<ReponseLogin> call, Response<ReponseLogin> response) {
-                        Log.i("onresponse","hana");
-                        Log.i("reponse",""+response.isSuccessful());
                         if(response.isSuccessful())
                         {
-                            Log.i("issucc","hana");
                             if(response.body().isAuth())
-                                Snackbar.make(getView(),"Connecte",Snackbar.LENGTH_LONG).show();
+                            {
+                                SharedPreferences sp = getActivity().getSharedPreferences(SESSION_SP_NAME, Context.MODE_PRIVATE);
+                                SharedPreferences.Editor edit = sp.edit();
+                                edit.putInt("ID_SESSION",response.body().getId());
+                                edit.apply();
+                                Snackbar.make(getView(), "Connecte", Snackbar.LENGTH_LONG).show();
+                                Intent i = new Intent(getActivity(), CreationEvent.class);
+                                startActivity(i);
+                            }
                             else
                                 Snackbar.make(getView(),"Username et mot de passe incorrect",Snackbar.LENGTH_LONG).show();
 
