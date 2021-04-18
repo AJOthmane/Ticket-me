@@ -1,8 +1,11 @@
 package ma.ensias.ticket_me.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import androidx.fragment.app.FragmentActivity;
@@ -15,13 +18,23 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.JsonObject;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import ma.ensias.ticket_me.R;
+import ma.ensias.ticket_me.forms.ResponseEvent;
 import ma.ensias.ticket_me.fragments.EventInfo;
-
+import ma.ensias.ticket_me.api.APIClient;
+import ma.ensias.ticket_me.api.APIInterface;
+import ma.ensias.ticket_me.requests.EventRequest;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 /*
     TODO LIST :
 
@@ -31,7 +44,6 @@ import ma.ensias.ticket_me.fragments.EventInfo;
     - and solve the date in Event class
 
  */
-
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
 
@@ -51,24 +63,58 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
+
         Intent intent = getIntent();
         nameOfEvent = intent.getStringExtra(EventInfo.NAME_OF_EVENT);
         datePicked = intent.getStringExtra(EventInfo.DATE_OF_EVENT);
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd HH:mm ").parse(datePicked);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         mapFragment.getMapAsync(this);
         button = findViewById(R.id.buttonmap);
+
         Snackbar.make(button,"Appuyez de manière prolongée sur le repère pour activer le déplacement",Snackbar.LENGTH_LONG).show();
+
+        Date finalDate = date;
         button.setOnClickListener(v -> {
 
-
             Snackbar.make(v,"Adresse : "+addressString,Snackbar.LENGTH_LONG).show();
-            
-            /*
-                Complete the call of api and sent
-             */
 
+            EventRequest infoEvent = new EventRequest(1,nameOfEvent,datePicked,addressString);
 
+            APIInterface apiInterface = APIClient.createService(APIInterface.class);
+            Call<ResponseEvent> call = apiInterface.createEvent(infoEvent);
+            call.enqueue(new Callback<ResponseEvent>() {
+                @Override
+                public void onResponse(Call<ResponseEvent> call, Response<ResponseEvent> response) {
 
+                    if(response.code() == 200)
+                    {
+                        AlertDialog alertDialog = new AlertDialog.Builder(MapsActivity.this).create();
+                        alertDialog.setTitle("Done");
+                        alertDialog.setMessage("Key : "+response.body().getKey());
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Got it",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
 
+                    if(response.code() == 500)
+                        Log.i("manadish","manadish");
+
+                }
+                @Override
+                public void onFailure(Call<ResponseEvent> call, Throwable t) {
+                    Log.e("Fail : login",t.getMessage());
+                }
+            });
         });
     }
     @Override

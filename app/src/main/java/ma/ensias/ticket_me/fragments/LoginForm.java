@@ -20,8 +20,8 @@ import java.util.HashMap;
 import ma.ensias.ticket_me.R;
 import ma.ensias.ticket_me.activities.CreationEvent;
 import ma.ensias.ticket_me.activities.MainActivity;
-import ma.ensias.ticket_me.requests.APIClient;
-import ma.ensias.ticket_me.requests.APIInterface;
+import ma.ensias.ticket_me.api.APIClient;
+import ma.ensias.ticket_me.api.APIInterface;
 import ma.ensias.ticket_me.forms.ReponseLogin;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -68,21 +68,24 @@ public class LoginForm extends Fragment {
                 call.enqueue(new Callback<ReponseLogin>() {
                     @Override
                     public void onResponse(Call<ReponseLogin> call, Response<ReponseLogin> response) {
+
                         if(response.isSuccessful())
                         {
+
                             if(response.body().isAuth())
                             {
                                 SharedPreferences sp = getActivity().getSharedPreferences(SESSION_SP_NAME, Context.MODE_PRIVATE);
                                 SharedPreferences.Editor edit = sp.edit();
                                 edit.putInt("ID_SESSION",response.body().getId());
                                 edit.apply();
-                                Snackbar.make(getView(), "Connecte", Snackbar.LENGTH_LONG).show();
                                 Intent i = new Intent(getActivity(), CreationEvent.class);
                                 startActivity(i);
                             }
-                            else
-                                Snackbar.make(getView(),"Username et mot de passe incorrect",Snackbar.LENGTH_LONG).show();
 
+                        }
+                        else {
+                            if(response.code() == 401)
+                                Snackbar.make(getView(), "Username et mot de passe incorrect", Snackbar.LENGTH_LONG).show();
                         }
                     }
 

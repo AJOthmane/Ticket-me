@@ -92,7 +92,7 @@ public class EventInfo extends Fragment {
                         Intent i = new Intent( (getActivity()), MapsActivity.class);
 
                         i.putExtra(NAME_OF_EVENT,nameText);
-                        i.putExtra(DATE_OF_EVENT,datePicked.toString());
+                        i.putExtra(DATE_OF_EVENT,transformDate(datePicked));
                         startActivity(i);
 
                     }
@@ -105,7 +105,7 @@ public class EventInfo extends Fragment {
     }
     public String transformDate(Calendar gc)
     {
-        SimpleDateFormat fmt = new SimpleDateFormat("\"yyyy-MM-dd HH:mm \"");
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         fmt.setCalendar(gc);
         return fmt.format(gc.getTime());
     }

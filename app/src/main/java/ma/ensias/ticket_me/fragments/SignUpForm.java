@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -17,9 +16,8 @@ import java.util.HashMap;
 
 import ma.ensias.ticket_me.R;
 import ma.ensias.ticket_me.forms.ResponseSignUp;
-import ma.ensias.ticket_me.model.User;
-import ma.ensias.ticket_me.requests.APIClient;
-import ma.ensias.ticket_me.requests.APIInterface;
+import ma.ensias.ticket_me.api.APIClient;
+import ma.ensias.ticket_me.api.APIInterface;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

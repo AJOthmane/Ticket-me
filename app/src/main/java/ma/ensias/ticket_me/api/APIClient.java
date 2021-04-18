@@ -1,18 +1,8 @@
-package ma.ensias.ticket_me.requests;
-
-import android.util.Log;
+package ma.ensias.ticket_me.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import ma.ensias.ticket_me.model.User;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
