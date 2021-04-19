@@ -1,4 +1,4 @@
-package ma.ensias.ticket_me.forms;
+package ma.ensias.ticket_me.response;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -8,9 +8,6 @@ public class ResponseSignUp {
     private Boolean success ;
     @SerializedName("error")
     private String error;
-
-    public ResponseSignUp() {
-    }
 
     public ResponseSignUp(Boolean id,String auth) {
         this.success = id;

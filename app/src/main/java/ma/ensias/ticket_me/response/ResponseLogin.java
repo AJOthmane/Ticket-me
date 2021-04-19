@@ -1,18 +1,15 @@
-package ma.ensias.ticket_me.forms;
+package ma.ensias.ticket_me.response;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ReponseLogin {
+public class ResponseLogin {
 
     @SerializedName("id")
     private int id ;
     @SerializedName("auth")
     private boolean auth;
 
-    public ReponseLogin() {
-    }
-
-    public ReponseLogin(int id,Boolean auth) {
+    public ResponseLogin(int id, Boolean auth) {
         this.id = id;
         this.auth = auth;
     }

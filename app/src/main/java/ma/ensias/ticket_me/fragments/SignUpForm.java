@@ -15,7 +15,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.HashMap;
 
 import ma.ensias.ticket_me.R;
-import ma.ensias.ticket_me.forms.ResponseSignUp;
+import ma.ensias.ticket_me.response.ResponseSignUp;
 import ma.ensias.ticket_me.api.APIClient;
 import ma.ensias.ticket_me.api.APIInterface;
 import retrofit2.Call;
@@ -25,7 +25,7 @@ import retrofit2.Response;
 
 public class SignUpForm extends Fragment {
 
-    private static int PASSWORD_MIN_LENGTH = 6;
+    private static final int PASSWORD_MIN_LENGTH = 6;
 
 
     EditText username;
@@ -62,7 +62,7 @@ public class SignUpForm extends Fragment {
             }
             else if (passwordText.length() <= PASSWORD_MIN_LENGTH)
             {
-                Snackbar.make(getView(),"Mot de passe doit contenir au minimum 6 caracteres",Snackbar.LENGTH_LONG).show();
+                Snackbar.make(getView(),"Mot de passe doit contenir au minimum "+PASSWORD_MIN_LENGTH+" caracteres",Snackbar.LENGTH_LONG).show();
             }
             else
             {
@@ -74,15 +74,14 @@ public class SignUpForm extends Fragment {
                 call.enqueue(new Callback<ResponseSignUp>() {
                     @Override
                     public void onResponse(Call<ResponseSignUp> call, Response<ResponseSignUp> response) {
-                        if(response.isSuccessful())
+                        if(response.code() == 200)
                         {
-                            if(response.body() != null)
+                            if(response.body().getError() == null)
                             {
-
                                 Snackbar.make(getView(),"Utilisateur est cree",Snackbar.LENGTH_LONG).show();
                             }
                             else
-                                Snackbar.make(getView(),"Opps un erreur est servenue",Snackbar.LENGTH_LONG).show();
+                                Snackbar.make(getView(),response.body().getError(),Snackbar.LENGTH_LONG).show();
                         }
                         else
                             Log.e("signup message", response.message());

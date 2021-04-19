@@ -1,15 +1,8 @@
 package ma.ensias.ticket_me.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,18 +11,16 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import com.google.android.material.snackbar.Snackbar;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
 
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
-
-import ma.ensias.ticket_me.activities.MapsActivity;
 import ma.ensias.ticket_me.R;
-
+import ma.ensias.ticket_me.activities.MapsActivity;
 
 public class EventInfo extends Fragment {
 
@@ -41,11 +32,8 @@ public class EventInfo extends Fragment {
     DatePicker date;
     TimePicker time;
 
-
     public EventInfo() {
-        // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +41,6 @@ public class EventInfo extends Fragment {
 
 
     }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,7 +55,6 @@ public class EventInfo extends Fragment {
         next.setOnClickListener(v -> {
 
                     String nameText = name.getText().toString();
-
                     Calendar datePicked = Calendar.getInstance();
                     datePicked.set(Calendar.YEAR,date.getYear());
                     datePicked.set(Calendar.MONTH,date.getMonth());
@@ -76,9 +62,7 @@ public class EventInfo extends Fragment {
                     datePicked.set(Calendar.HOUR,time.getHour()) ;
                     datePicked.set(Calendar.MINUTE,time.getMinute()) ;
                     Calendar dateSys = Calendar.getInstance();
-                    GregorianCalendar sysdate = new GregorianCalendar();
 
-                    
                     if(nameText.isEmpty() )
                     {
                         Snackbar.make(getView(),"Veuillez remplir tous les champs la date est : ",Snackbar.LENGTH_LONG).show();
@@ -94,13 +78,10 @@ public class EventInfo extends Fragment {
                         i.putExtra(NAME_OF_EVENT,nameText);
                         i.putExtra(DATE_OF_EVENT,transformDate(datePicked));
                         startActivity(i);
-
                     }
                 }
 
         );
-
-
         return infoView;
     }
     public String transformDate(Calendar gc)
@@ -109,5 +90,4 @@ public class EventInfo extends Fragment {
         fmt.setCalendar(gc);
         return fmt.format(gc.getTime());
     }
-
 }

@@ -22,7 +22,7 @@ import ma.ensias.ticket_me.activities.CreationEvent;
 import ma.ensias.ticket_me.activities.MainActivity;
 import ma.ensias.ticket_me.api.APIClient;
 import ma.ensias.ticket_me.api.APIInterface;
-import ma.ensias.ticket_me.forms.ReponseLogin;
+import ma.ensias.ticket_me.response.ResponseLogin;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,8 +31,6 @@ import retrofit2.Response;
 public class LoginForm extends Fragment {
 
     public static final String SESSION_SP_NAME = "LoginForm";
-    public static final String ID_SESSION = "ID_SESSION";
-
 
     EditText username;
     EditText password;
@@ -64,10 +62,10 @@ public class LoginForm extends Fragment {
                 HashMap<String,String> cred = new HashMap<>();
                 cred.put(MainActivity.USERNAME_FIELD,usernameText);
                 cred.put(MainActivity.PASSWORD_FIELD,passwordText);
-                Call<ReponseLogin> call = apiInterface.VerifyLogin(cred);
-                call.enqueue(new Callback<ReponseLogin>() {
+                Call<ResponseLogin> call = apiInterface.VerifyLogin(cred);
+                call.enqueue(new Callback<ResponseLogin>() {
                     @Override
-                    public void onResponse(Call<ReponseLogin> call, Response<ReponseLogin> response) {
+                    public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
 
                         if(response.isSuccessful())
                         {
@@ -90,7 +88,7 @@ public class LoginForm extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<ReponseLogin> call, Throwable t) {
+                    public void onFailure(Call<ResponseLogin> call, Throwable t) {
                         Log.e("Fail : login",t.getMessage());
                     }
                 });
