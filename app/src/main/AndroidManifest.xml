@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ticketme">
-        <activity android:name=".TicketCheck"></activity>
+        <activity android:name=".TicketCreation"></activity>
+        <activity android:name=".TicketCheck" />
         <activity
             android:name=".QrScanner"
             android:exported="true" />
