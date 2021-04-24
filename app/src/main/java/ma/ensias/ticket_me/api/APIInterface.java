@@ -3,6 +3,8 @@ package ma.ensias.ticket_me.api;
 
 import java.util.HashMap;
 
+import ma.ensias.ticket_me.requests.RequestCategory;
+import ma.ensias.ticket_me.response.ResponseCategory;
 import ma.ensias.ticket_me.response.ResponseLogin;
 import ma.ensias.ticket_me.response.ResponseEvent;
 import ma.ensias.ticket_me.response.ResponseSignUp;
@@ -22,4 +24,6 @@ public interface APIInterface {
     @POST("createevent")
     Call<ResponseEvent> createEvent(@Body RequestEvent infos);
 
+    @POST("createcategory")
+    Call<ResponseCategory> createCategory(@Body RequestCategory infos);
 }
