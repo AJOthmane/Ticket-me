@@ -21,5 +21,11 @@
     <string name="buttonCreationEvent_next">Next</string>
     <string name="title_activity_maps">Map</string>
     <string name="header_maps">Chose the location of the event</string>
+    <string name="create_category">Create Category</string>
+    <string name="name_of_category">Name of Category</string>
+    <string name="price_of_category">Price of Category</string>
+    <string name="number_of_places_available">Number of Places</string>
+    <string name="button_create">Create</string>
+    <string name="button_location">Pick a location</string>
 
 </resources>

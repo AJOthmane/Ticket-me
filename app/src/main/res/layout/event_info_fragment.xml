@@ -119,7 +119,6 @@
             android:id="@+id/button_creation_event_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_rec"
             android:text="@string/buttonCreationEvent_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
