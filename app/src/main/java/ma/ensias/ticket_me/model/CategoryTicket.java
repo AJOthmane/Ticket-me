@@ -8,7 +8,7 @@ public class CategoryTicket {
 
     private String picture;
 
-    private Double prix;
+    private Double price;
 
     private int numberOfPlaces;
 
@@ -16,12 +16,60 @@ public class CategoryTicket {
 
     public CategoryTicket() {}
 
-    public CategoryTicket(int id, String name, String picture, Double prix, int numberOfPlaces, Event event) {
+    public CategoryTicket(int id, String name, String picture, Double price, int numberOfPlaces, Event event) {
         this.id = id;
         this.name = name;
         this.picture = picture;
-        this.prix = prix;
+        this.price = price;
         this.numberOfPlaces = numberOfPlaces;
+        this.event = event;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public int getNumberOfPlaces() {
+        return numberOfPlaces;
+    }
+
+    public void setNumberOfPlaces(int numberOfPlaces) {
+        this.numberOfPlaces = numberOfPlaces;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
         this.event = event;
     }
 }

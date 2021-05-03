@@ -13,5 +13,30 @@
     <string name="button_login">Log in</string>
     <string name="signup_password_confirmation_hint">Password Confirmation</string>
     <string name="creer_nouveau_compte">Vous n\'avez pas un compte ? Creer votre compte</string>
+    <string name="create_event">Creation of event</string>
+    <string name="eventInfo">Basic Informations</string>
+    <string name="nameOfEvent">Name</string>
+    <string name="dateofevent">Date</string>
+    <string name="timeEvent">Time</string>
+    <string name="buttonCreationEvent_next">Next</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="header_maps">Chose the location of the event</string>
+    <string name="create_category">Create Category</string>
+    <string name="name_of_category">Name of Category</string>
+    <string name="price_of_category">Price of Category</string>
+    <string name="number_of_places_available">Number of Places</string>
+    <string name="button_create">Create</string>
+    <string name="button_location">Pick a location</string>
+    <string name="title_activity_main">MainActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="show_location">Show Location</string>
+    <string name="name_label">Name of Category</string>
 
 </resources>

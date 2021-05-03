@@ -1,5 +1,8 @@
 package ma.ensias.ticket_me.fragments;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,21 +10,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.HashMap;
+
 import ma.ensias.ticket_me.R;
-import ma.ensias.ticket_me.requests.APIClient;
-import ma.ensias.ticket_me.requests.APIInterface;
+import ma.ensias.ticket_me.activities.CreationEvent;
+import ma.ensias.ticket_me.activities.MainActivity;
+import ma.ensias.ticket_me.api.APIClient;
+import ma.ensias.ticket_me.api.APIInterface;
+import ma.ensias.ticket_me.response.ResponseLogin;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
 public class LoginForm extends Fragment {
+
+    public static final String SESSION_SP_NAME = "LoginForm";
 
     EditText username;
     EditText password;
@@ -50,22 +59,36 @@ public class LoginForm extends Fragment {
             else
             {
                 APIInterface apiInterface = APIClient.createService(APIInterface.class);
-                Call<Boolean> call = apiInterface.VerifyLogin(usernameText,passwordText);
-                call.enqueue(new Callback<Boolean>() {
+                HashMap<String,String> cred = new HashMap<>();
+                cred.put(MainActivity.USERNAME_FIELD,usernameText);
+                cred.put(MainActivity.PASSWORD_FIELD,passwordText);
+                Call<ResponseLogin> call = apiInterface.VerifyLogin(cred);
+                call.enqueue(new Callback<ResponseLogin>() {
                     @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
+
                         if(response.isSuccessful())
                         {
-                            if(response.body())
-                                Snackbar.make(getView(),"Connecte",Snackbar.LENGTH_LONG).show();
-                            else
-                                Snackbar.make(getView(),"Username et mot de passe incorrect",Snackbar.LENGTH_LONG).show();
 
+                            if(response.body().isAuth())
+                            {
+                                SharedPreferences sp = getActivity().getSharedPreferences(SESSION_SP_NAME, Context.MODE_PRIVATE);
+                                SharedPreferences.Editor edit = sp.edit();
+                                edit.putInt("ID_SESSION",response.body().getId());
+                                edit.commit();
+                                Intent i = new Intent(getActivity(), CreationEvent.class);
+                                startActivity(i);
+                            }
+
+                        }
+                        else {
+                            if(response.code() == 401)
+                                Snackbar.make(getView(), "Username et mot de passe incorrect", Snackbar.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<Boolean> call, Throwable t) {
+                    public void onFailure(Call<ResponseLogin> call, Throwable t) {
                         Log.e("Fail : login",t.getMessage());
                     }
                 });

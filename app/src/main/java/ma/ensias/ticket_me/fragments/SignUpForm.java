@@ -7,16 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.HashMap;
+
 import ma.ensias.ticket_me.R;
-import ma.ensias.ticket_me.model.User;
-import ma.ensias.ticket_me.requests.APIClient;
-import ma.ensias.ticket_me.requests.APIInterface;
+import ma.ensias.ticket_me.response.ResponseSignUp;
+import ma.ensias.ticket_me.api.APIClient;
+import ma.ensias.ticket_me.api.APIInterface;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,7 +25,8 @@ import retrofit2.Response;
 
 public class SignUpForm extends Fragment {
 
-    private static int PASSWORD_MIN_LENGTH = 6;
+    private static final int PASSWORD_MIN_LENGTH = 6;
+
 
     EditText username;
     EditText password;
@@ -49,46 +51,44 @@ public class SignUpForm extends Fragment {
 
             if(usernameText.isEmpty() || passwordText.isEmpty() || passwordConfirmationText.isEmpty() )
             {
-               //Toast.makeText(getContext(),"Veuillez remplir tous les champs",Toast.LENGTH_LONG).show();
+
                 Snackbar.make(getView(),"Veuillez remplir tous les champs",Snackbar.LENGTH_LONG).show();
 
             }
             else if(!passwordText.equals(passwordConfirmationText))
             {
-               //Toast.makeText(getActivity(),"Le mote de passe et confirmation ne sont pas identiques",Toast.LENGTH_LONG).show();
+
                 Snackbar.make(getView(),"Le mote de passe et confirmation ne sont pas identiques",Snackbar.LENGTH_LONG).show();
             }
             else if (passwordText.length() <= PASSWORD_MIN_LENGTH)
             {
-                //Toast.makeText(getActivity(),"Mot de passe doit contenir au minimum 6 caracteres",Toast.LENGTH_LONG).show();
-                Snackbar.make(getView(),"Mot de passe doit contenir au minimum 6 caracteres",Snackbar.LENGTH_LONG).show();
+                Snackbar.make(getView(),"Mot de passe doit contenir au minimum "+PASSWORD_MIN_LENGTH+" caracteres",Snackbar.LENGTH_LONG).show();
             }
             else
             {
                 APIInterface apiInterface = APIClient.createService(APIInterface.class);
-                Call<User> call = apiInterface.signUp(usernameText,passwordText);
-                call.enqueue(new Callback<User>() {
+                HashMap<String,String> infos = new HashMap<>();
+                infos.put("username",usernameText);
+                infos.put("password",passwordText);
+                Call<ResponseSignUp> call = apiInterface.signUp(infos);
+                call.enqueue(new Callback<ResponseSignUp>() {
                     @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        if(response.isSuccessful())
+                    public void onResponse(Call<ResponseSignUp> call, Response<ResponseSignUp> response) {
+                        if(response.code() == 200)
                         {
-                            if(response.body() != null)
+                            if(response.body().getError() == null)
                             {
-
                                 Snackbar.make(getView(),"Utilisateur est cree",Snackbar.LENGTH_LONG).show();
                             }
                             else
-                                Snackbar.make(getView(),"Opps un erreur est servenue",Snackbar.LENGTH_LONG).show();
-                                //Toast.makeText(getActivity(),"Opps un erreur est servenue",Toast.LENGTH_LONG).show();
-
+                                Snackbar.make(getView(),response.body().getError(),Snackbar.LENGTH_LONG).show();
                         }
                         else
                             Log.e("signup message", response.message());
 
                     }
-
                     @Override
-                    public void onFailure(Call<User> call, Throwable t)
+                    public void onFailure(Call<ResponseSignUp> call, Throwable t)
                     {
                         Log.e("signup failure", t.getMessage());
                     }
