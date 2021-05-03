@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "ma.ensias.ticket_me"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -40,6 +40,11 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.scwang.wave:MultiWaveHeader:1.0.0-alpha-1'
 
+    implementation 'com.budiyev.android:code-scanner:2.1.0'
+
+
+
+
     // GSON and retrofit
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
@@ -47,5 +52,6 @@ dependencies {
     // Log for retrofit
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+
 
 }
