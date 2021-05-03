@@ -1,4 +1,4 @@
-package ma.ensias.ticket_me;
+package ma.ensias.ticket_me.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 
+import ma.ensias.ticket_me.R;
 import ma.ensias.ticket_me.fragments.LoginForm;
 import ma.ensias.ticket_me.fragments.SignUpForm;
 

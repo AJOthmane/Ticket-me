@@ -15,10 +15,9 @@
         android:theme="@style/Theme.Ticketme">
         <activity android:name=".TicketCreation"></activity>
         <activity android:name=".TicketCheck" />
-        <activity
-            android:name=".QrScanner"
-            android:exported="true" />
+        <activity android:name=".QrScanner" />
         <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

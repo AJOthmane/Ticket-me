@@ -9,8 +9,8 @@
     <com.scwang.wave.MultiWaveHeader
         android:id="@+id/waveHeader"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginBottom="648dp"
+        android:layout_height="231dp"
+        android:layout_marginBottom="1476dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -18,25 +18,25 @@
         android:id="@+id/welcomeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="104dp"
         android:text="Logo"
         android:textColor="@color/dodgerblue"
-        android:textSize="20sp"
+        android:textSize="60sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/waveHeader" />
+
     <FrameLayout
         android:id="@+id/fragmentLoginSignup"
-        android:layout_width="337dp"
-        android:layout_height="350dp"
+        android:layout_width="727dp"
+        android:layout_height="856dp"
         android:layout_marginTop="48dp"
         app:layout_constraintBottom_toTopOf="@+id/createaccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeTextView"
-        app:layout_constraintVertical_bias="0.24">
+        app:layout_constraintVertical_bias="0.108">
 
     </FrameLayout>
 
@@ -44,9 +44,10 @@
         android:id="@+id/createaccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="200dp"
         android:color="@android:color/holo_red_light"
         android:text="@string/creer_nouveau_compte"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
