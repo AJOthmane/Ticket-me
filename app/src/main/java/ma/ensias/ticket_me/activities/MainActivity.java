@@ -1,5 +1,8 @@
 package ma.ensias.ticket_me.activities;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -22,6 +25,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences sp = getSharedPreferences("LoginForm", Context.MODE_PRIVATE);
+        SharedPreferences.Editor ed = sp.edit();
+        if(sp.getInt("ID_SESSION",0) != 0)
+        {
+            Intent intent = new Intent(this,CreationEvent.class);
+            startActivity(intent);
+        }
 
         createAccount = findViewById(R.id.createaccount);
         if (savedInstanceState == null) {

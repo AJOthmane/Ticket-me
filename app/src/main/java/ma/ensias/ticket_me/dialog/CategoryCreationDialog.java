@@ -1,20 +1,19 @@
-package ma.ensias.ticket_me;
+package ma.ensias.ticket_me.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import ma.ensias.ticket_me.R;
 import ma.ensias.ticket_me.api.APIClient;
 import ma.ensias.ticket_me.api.APIInterface;
 import ma.ensias.ticket_me.requests.RequestCategory;
 import ma.ensias.ticket_me.response.ResponseCategory;
-import ma.ensias.ticket_me.response.ResponseLogin;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -75,7 +75,7 @@ public class LoginForm extends Fragment {
                                 SharedPreferences sp = getActivity().getSharedPreferences(SESSION_SP_NAME, Context.MODE_PRIVATE);
                                 SharedPreferences.Editor edit = sp.edit();
                                 edit.putInt("ID_SESSION",response.body().getId());
-                                edit.apply();
+                                edit.commit();
                                 Intent i = new Intent(getActivity(), CreationEvent.class);
                                 startActivity(i);
                             }
