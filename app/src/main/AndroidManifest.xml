@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ma.ensias.ticket_me">
 
+
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,6 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ticketme">
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -28,6 +31,12 @@
             android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".activities.CreationEvent" />
+
+        <activity android:name=".TicketCreation"></activity>
+        <activity android:name=".TicketCheck" />
+        <activity android:name=".QrScanner" />
+        <activity android:name=".MainActivity">
+
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
