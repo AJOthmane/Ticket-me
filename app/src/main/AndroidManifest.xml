@@ -35,7 +35,6 @@
         <activity android:name=".TicketCreation"></activity>
         <activity android:name=".TicketCheck" />
         <activity android:name=".QrScanner" />
-        <activity android:name=".MainActivity">
 
         <activity android:name=".activities.MainActivity">
             <intent-filter>
