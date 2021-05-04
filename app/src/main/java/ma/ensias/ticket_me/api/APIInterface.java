@@ -44,4 +44,7 @@ public interface APIInterface {
 
     @POST("checkticket")
     Call<ResponseTicket> verifyTicket(@Body HashMap<String,String> ticket);
+
+    @POST("validateticket")
+    Call<Boolean> validateTicket(@Body HashMap<String,String> ticket);
 }
