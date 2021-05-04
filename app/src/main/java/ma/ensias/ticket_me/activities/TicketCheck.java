@@ -2,11 +2,14 @@ package ma.ensias.ticket_me.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -78,7 +81,20 @@ public class TicketCheck extends AppCompatActivity {
         });
         validationButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Call<ResponseTicket> call = apiInterface.verifyTicket(reqBody);
+                Call<Boolean> call = apiInterface.validateTicket(reqBody);
+                call.enqueue(new Callback<Boolean>() {
+                    @Override
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                        Intent intent = new Intent(getBaseContext(), QrScanner.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Boolean> call, Throwable t) {
+                        Toast.makeText(TicketCheck.this, "Une erreur est apparue", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
     }
