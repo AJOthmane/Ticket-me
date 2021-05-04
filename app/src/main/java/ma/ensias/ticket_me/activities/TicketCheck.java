@@ -1,9 +1,11 @@
-package ma.ensias.ticket_me;
+package ma.ensias.ticket_me.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.TextView;
+
+import ma.ensias.ticket_me.R;
 
 public class TicketCheck extends AppCompatActivity {
 

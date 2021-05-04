@@ -32,9 +32,9 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".activities.CreationEvent" />
 
-        <activity android:name=".TicketCreation"></activity>
-        <activity android:name=".TicketCheck" />
-        <activity android:name=".QrScanner" />
+        <activity android:name=".activities.TicketCreation"></activity>
+        <activity android:name=".activities.TicketCheck" />
+        <activity android:name=".activities.QrScanner" />
 
         <activity android:name=".activities.MainActivity">
             <intent-filter>
