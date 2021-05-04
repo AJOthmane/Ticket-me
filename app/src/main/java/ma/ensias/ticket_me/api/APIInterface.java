@@ -13,6 +13,7 @@ import ma.ensias.ticket_me.response.ResponseLogin;
 import ma.ensias.ticket_me.response.ResponseEvent;
 import ma.ensias.ticket_me.response.ResponseSignUp;
 import ma.ensias.ticket_me.requests.RequestEvent;
+import ma.ensias.ticket_me.response.ResponseTicket;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -40,4 +41,7 @@ public interface APIInterface {
 
     @GET("event")
     Call<Event> getEvent(@Body int key_event);
+
+    @POST("checkticket")
+    Call<ResponseTicket> verifyTicket(@Body HashMap<String,String> ticket);
 }
