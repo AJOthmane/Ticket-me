@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +15,6 @@ import java.util.HashMap;
 import ma.ensias.ticket_me.R;
 import ma.ensias.ticket_me.api.APIClient;
 import ma.ensias.ticket_me.api.APIInterface;
-import ma.ensias.ticket_me.response.ResponseLogin;
 import ma.ensias.ticket_me.response.ResponseTicket;
 import retrofit2.Call;
 import retrofit2.Callback;

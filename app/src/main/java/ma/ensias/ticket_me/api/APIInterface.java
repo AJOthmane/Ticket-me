@@ -8,6 +8,7 @@ import java.util.List;
 import ma.ensias.ticket_me.model.CategoryTicket;
 import ma.ensias.ticket_me.model.Event;
 import ma.ensias.ticket_me.requests.RequestCategory;
+import ma.ensias.ticket_me.response.ResponseCategories;
 import ma.ensias.ticket_me.response.ResponseCategory;
 import ma.ensias.ticket_me.response.ResponseLogin;
 import ma.ensias.ticket_me.response.ResponseEvent;
@@ -47,4 +48,7 @@ public interface APIInterface {
 
     @POST("validateticket")
     Call<Boolean> validateTicket(@Body HashMap<String,String> ticket);
+
+    @POST("getCategories")
+    Call<ResponseCategories> getCategories(@Body HashMap<String,String> event);
 }
