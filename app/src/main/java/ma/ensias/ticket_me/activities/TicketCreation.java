@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import ma.ensias.ticket_me.R;
 import ma.ensias.ticket_me.api.APIClient;
@@ -31,6 +34,8 @@ public class TicketCreation extends AppCompatActivity {
         EditText email = (EditText) findViewById(R.id.cemail);
         Spinner categories = (Spinner) findViewById(R.id.spinner);
         Button creer = (Button) findViewById(R.id.creerTicket);
+        List<String> categoriesId = new ArrayList<String>();
+        List<String> categoriesSpinner = new ArrayList<String>();
         APIInterface apiInterface = APIClient.createService(APIInterface.class);
         HashMap<String,String> reqBody = new HashMap<>();
         reqBody.put("event","1");
@@ -40,7 +45,15 @@ public class TicketCreation extends AppCompatActivity {
             public void onResponse(Call<ResponseCategories> call, Response<ResponseCategories> response) {
                 if(response.body().getValid())
                 {
-
+                    List<HashMap<String,String>> bresponse = response.body().getCategories();
+                    for (HashMap<String,String> cat:bresponse
+                         ) {
+                        categoriesId.add(cat.get("ID"));
+                        categoriesSpinner.add(cat.get("NOM")+" - "+cat.get("PRIX")+" DH");
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item, categoriesSpinner);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    categories.setAdapter(adapter);
                 }
                 else
                 {
