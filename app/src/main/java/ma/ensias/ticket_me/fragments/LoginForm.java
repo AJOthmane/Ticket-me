@@ -1,5 +1,6 @@
 package ma.ensias.ticket_me.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -50,6 +51,7 @@ public class LoginForm extends Fragment {
         loginButton = loginView.findViewById(R.id.login_button);
 
         loginButton.setOnClickListener(v -> {
+
             String usernameText = username.getText().toString();
             String passwordText = password.getText().toString();
             if(usernameText.isEmpty() || passwordText.isEmpty())
@@ -58,6 +60,14 @@ public class LoginForm extends Fragment {
             }
             else
             {
+
+                ProgressDialog progress = new ProgressDialog(this.getContext());
+                progress.setTitle("Connexion");
+                progress.setMessage("Wait while Connecting...");
+                progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+                progress.show();
+
+
                 APIInterface apiInterface = APIClient.createService(APIInterface.class);
                 HashMap<String,String> cred = new HashMap<>();
                 cred.put(MainActivity.USERNAME_FIELD,usernameText);
@@ -69,7 +79,6 @@ public class LoginForm extends Fragment {
 
                         if(response.isSuccessful())
                         {
-
                             if(response.body().isAuth())
                             {
                                 SharedPreferences sp = getActivity().getSharedPreferences(SESSION_SP_NAME, Context.MODE_PRIVATE);
@@ -79,11 +88,13 @@ public class LoginForm extends Fragment {
                                 Intent i = new Intent(getActivity(), CreationEvent.class);
                                 startActivity(i);
                             }
-
                         }
                         else {
                             if(response.code() == 401)
+                            {
+                                progress.dismiss();
                                 Snackbar.make(getView(), "Username et mot de passe incorrect", Snackbar.LENGTH_LONG).show();
+                            }
                         }
                     }
 

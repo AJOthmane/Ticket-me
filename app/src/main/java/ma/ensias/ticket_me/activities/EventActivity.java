@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,11 +56,13 @@ public class EventActivity extends AppCompatActivity {
         add.setOnClickListener(v -> {
 
             CategoryCreationDialog ccd = new CategoryCreationDialog(this,idEvent);
+            ccd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             ccd.show();
 
         });
 
         APIInterface apiInterface = APIClient.createService(APIInterface.class);
+        /*
         Call<LinkedList<CategoryTicket>> call_Category = apiInterface.getCategories(idEvent);
         call_Category.enqueue(new Callback<LinkedList<CategoryTicket>>() {
             @Override
@@ -114,6 +118,8 @@ public class EventActivity extends AppCompatActivity {
 
 
         });
+
+         */
 
 
 

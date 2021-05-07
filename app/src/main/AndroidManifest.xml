@@ -25,6 +25,7 @@
             android:required="false" />
 
         <activity android:name=".activities.EventActivity">
+
         </activity>
 
         <activity

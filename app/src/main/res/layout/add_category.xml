@@ -2,7 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_bg"
+    >
 
     <TextView
         android:id="@+id/textView3"
@@ -66,7 +68,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/category_price" />
 
-    <Button
+        <Button
+        app:backgroundTint="@null"
+            android:background="@color/green"
         android:id="@+id/button_creation_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

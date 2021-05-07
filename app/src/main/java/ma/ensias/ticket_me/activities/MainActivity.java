@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sp = getSharedPreferences("LoginForm", Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sp.edit();
-        if(sp.getInt("ID_SESSION",0) != 0)
+        if(sp.getInt("ID_SESSION",0) >  0)
         {
             Intent intent = new Intent(this,CreationEvent.class);
             startActivity(intent);
