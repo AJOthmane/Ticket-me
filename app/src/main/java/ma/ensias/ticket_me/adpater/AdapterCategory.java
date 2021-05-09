@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,6 +42,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.ViewHo
         holder.places.setText(category.getNumberOfPlaces());
         holder.price.setText(category.getPrice()+" DH");
 
+
     }
 
     @Override
@@ -51,6 +53,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView name,places,price;
+        private ImageView button;
 
         public ViewHolder(final View itemView) {
 
@@ -58,6 +61,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.ViewHo
             name = itemView.findViewById(R.id.name_value);
             price = itemView.findViewById(R.id.price_value);
             places = itemView.findViewById(R.id.number_of_places_available_value);
+
 
         }
     }

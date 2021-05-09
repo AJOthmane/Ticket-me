@@ -25,6 +25,9 @@ import ma.ensias.ticket_me.api.APIClient;
 import ma.ensias.ticket_me.api.APIInterface;
 import ma.ensias.ticket_me.model.CategoryTicket;
 import ma.ensias.ticket_me.model.Event;
+import ma.ensias.ticket_me.response.ResponseEventInfo;
+import ma.ensias.ticket_me.response.ResponseListCategory;
+import ma.ensias.ticket_me.response.ResponseListEvents;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,11 +36,11 @@ public class EventActivity extends AppCompatActivity {
 
     protected FloatingActionButton add;
     protected int idEvent;
-    protected Event event;
-    protected TextView name_of_event;
+    protected ResponseEventInfo event;
+    protected TextView name_of_event , date_event;
     protected Button location;
     protected RecyclerView categories;
-    protected LinkedList<CategoryTicket> categoriesList;
+    protected ResponseListCategory categoriesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +50,12 @@ public class EventActivity extends AppCompatActivity {
         Intent i = getIntent();
         idEvent = i.getIntExtra("id_event",-1);
         name_of_event = (TextView)findViewById(R.id.name_event);
+        date_event = (TextView) findViewById(R.id.date_values);
         location = (Button)findViewById(R.id.location_button);
         add = findViewById(R.id.add_category);
         categories = findViewById(R.id.list_categorie);
         categories.setLayoutManager(new LinearLayoutManager(this));
-
+        loadDate();
 
         add.setOnClickListener(v -> {
 
@@ -60,17 +64,18 @@ public class EventActivity extends AppCompatActivity {
             ccd.show();
 
         });
-
+    }
+    public void loadDate()
+    {
         APIInterface apiInterface = APIClient.createService(APIInterface.class);
-        /*
-        Call<LinkedList<CategoryTicket>> call_Category = apiInterface.getCategories(idEvent);
-        call_Category.enqueue(new Callback<LinkedList<CategoryTicket>>() {
+        Call<ResponseListCategory> call_Category = apiInterface.getCategories(idEvent);
+        call_Category.enqueue(new Callback<ResponseListCategory>() {
             @Override
-            public void onResponse(Call<LinkedList<CategoryTicket>> call, Response<LinkedList<CategoryTicket>> response) {
+            public void onResponse(Call<ResponseListCategory> call, Response<ResponseListCategory> response) {
                 if(response.code() == 200)
                 {
                     categoriesList = response.body();
-                    categories.setAdapter(new AdapterCategory(categoriesList,getApplicationContext()));
+                    categories.setAdapter(new AdapterCategory(categoriesList.getListOfEvents(),getApplicationContext()));
                 }
                 else
                 {
@@ -79,49 +84,40 @@ public class EventActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<LinkedList<CategoryTicket>> call, Throwable t)
+            public void onFailure(Call<ResponseListCategory> call, Throwable t)
             {
                 Log.e("error_event","Error connexion with api");
             }
         });
 
-        Call<Event> call = apiInterface.getEvent(idEvent);
-        call.enqueue(new Callback<Event>() {
+        Call<ResponseEventInfo> call = apiInterface.getEvent(idEvent);
+        call.enqueue(new Callback<ResponseEventInfo>() {
             @Override
-            public void onResponse(Call<Event> call, Response<Event> response) {
+            public void onResponse(Call<ResponseEventInfo> call, Response<ResponseEventInfo> response) {
                 if(response.code() == 200)
                 {
                     event = response.body();
+                    name_of_event.setText(event.getEvent().getName());
+                    date_event.setText(event.getEvent().getDate()+"");
+                    location.setOnClickListener(v -> {
+
+                        Uri gmmIntentUri = Uri.parse("geo:0,0?q="+event.getEvent().getLocation());
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+                        startActivity(mapIntent);
+
+                    });
                 }
                 else
                 {
                     Log.e("error_event","No event with the id given");
                 }
             }
-
             @Override
-            public void onFailure(Call<Event> call, Throwable t)
+            public void onFailure(Call<ResponseEventInfo> call, Throwable t)
             {
                 Log.e("error_event","Error connexion with api");
             }
         });
-
-        name_of_event.setText(event.getName());
-
-
-        location.setOnClickListener(v -> {
-
-            Uri gmmIntentUri = Uri.parse("geo:0,0?q="+event.getLocation());
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-            mapIntent.setPackage("com.google.android.apps.maps");
-            startActivity(mapIntent);
-
-
-        });
-
-         */
-
-
-
     }
 }
