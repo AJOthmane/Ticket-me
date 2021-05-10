@@ -39,7 +39,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.ViewHo
     public void onBindViewHolder(@NonNull AdapterCategory.ViewHolder holder, int position) {
         CategoryTicket category = this.categories.get(position);
         holder.name.setText(category.getName());
-        holder.places.setText(category.getNumberOfPlaces());
+        holder.places.setText(category.getNumberOfPlaces()+" Places");
         holder.price.setText(category.getPrice()+" DH");
 
 

@@ -1,6 +1,7 @@
 package ma.ensias.ticket_me.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,6 +56,8 @@ public class EventActivity extends AppCompatActivity {
         add = findViewById(R.id.add_category);
         categories = findViewById(R.id.list_categorie);
         categories.setLayoutManager(new LinearLayoutManager(this));
+        categories.addItemDecoration(new DividerItemDecoration(this,
+                DividerItemDecoration.VERTICAL));
         loadDate();
 
         add.setOnClickListener(v -> {
@@ -75,6 +78,7 @@ public class EventActivity extends AppCompatActivity {
                 if(response.code() == 200)
                 {
                     categoriesList = response.body();
+
                     categories.setAdapter(new AdapterCategory(categoriesList.getListOfEvents(),getApplicationContext()));
                 }
                 else
