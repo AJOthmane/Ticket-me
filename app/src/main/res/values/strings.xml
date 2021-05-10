@@ -38,5 +38,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="show_location">Show Location</string>
     <string name="name_label">Name of Category</string>
-
+    <string name="ticket_creation_confirmation_title">Confirmation de création de ticket</string>
+    <string name="ticket_creation_confirmation_content">Etes-vous sûr de vouloir créer le ticket </string>
 </resources>

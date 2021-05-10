@@ -6,18 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ResponseCategories {
-    @SerializedName("valid")
-    private boolean valid ;
+
     @SerializedName("categories")
     private List<HashMap<String,String>> categories;
 
-    public ResponseCategories(boolean valid, List<HashMap<String,String>> categories) {
-        this.valid = valid;
+    public ResponseCategories(List<HashMap<String,String>> categories) {
         this.categories = categories;
     }
 
     public boolean getValid() {
-        return valid;
+        return (categories == null) ? false : true;
     }
 
     public List<HashMap<String,String>> getCategories()

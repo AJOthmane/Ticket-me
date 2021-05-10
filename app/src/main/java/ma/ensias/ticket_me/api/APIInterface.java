@@ -19,6 +19,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface APIInterface {
 
@@ -49,6 +50,6 @@ public interface APIInterface {
     @POST("validateticket")
     Call<Boolean> validateTicket(@Body HashMap<String,String> ticket);
 
-    @POST("getCategories")
-    Call<ResponseCategories> getCategories(@Body HashMap<String,String> event);
+    @GET("categories")
+    Call<ResponseCategories> getCategories2(@Query("id_event") int event);
 }
