@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -38,8 +39,8 @@ public class EventActivity extends AppCompatActivity {
     protected FloatingActionButton add;
     protected int idEvent;
     protected ResponseEventInfo event;
-    protected TextView name_of_event , date_event;
-    protected Button location;
+    protected TextView  date_event,empty;
+    protected Button name_of_event,location;
     protected RecyclerView categories;
     protected ResponseListCategory categoriesList;
 
@@ -50,7 +51,7 @@ public class EventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category_list);
         Intent i = getIntent();
         idEvent = i.getIntExtra("id_event",-1);
-        name_of_event = (TextView)findViewById(R.id.name_event);
+        name_of_event = (Button) findViewById(R.id.name_event);
         date_event = (TextView) findViewById(R.id.date_values);
         location = (Button)findViewById(R.id.location_button);
         add = findViewById(R.id.add_category);
@@ -77,19 +78,24 @@ public class EventActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseListCategory> call, Response<ResponseListCategory> response) {
                 if(response.code() == 200)
                 {
-                    categoriesList = response.body();
+                    if(response.body().getListOfEvents() != null)
+                    {
+                        categoriesList = response.body();
+                        categories.setAdapter(new AdapterCategory(categoriesList.getListOfEvents(), getApplicationContext()));
+                    }
 
-                    categories.setAdapter(new AdapterCategory(categoriesList.getListOfEvents(),getApplicationContext()));
                 }
                 else
                 {
                     Log.e("error_event","No event with the id given");
+
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseListCategory> call, Throwable t)
             {
+
                 Log.e("error_event","Error connexion with api");
             }
         });
@@ -100,6 +106,7 @@ public class EventActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseEventInfo> call, Response<ResponseEventInfo> response) {
                 if(response.code() == 200)
                 {
+
                     event = response.body();
                     name_of_event.setText(event.getEvent().getName());
                     date_event.setText(event.getEvent().getDate()+"");
@@ -114,12 +121,16 @@ public class EventActivity extends AppCompatActivity {
                 }
                 else
                 {
+
                     Log.e("error_event","No event with the id given");
+
                 }
             }
             @Override
             public void onFailure(Call<ResponseEventInfo> call, Throwable t)
             {
+                empty.setVisibility(View.GONE);
+                categories.setVisibility(View.VISIBLE);
                 Log.e("error_event","Error connexion with api");
             }
         });

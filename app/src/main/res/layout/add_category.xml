@@ -70,7 +70,7 @@
 
         <Button
         app:backgroundTint="@null"
-            android:background="@color/green"
+        android:background="@color/green"
         android:id="@+id/button_creation_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

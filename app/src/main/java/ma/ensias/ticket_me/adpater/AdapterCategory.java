@@ -63,6 +63,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.ViewHo
             places = itemView.findViewById(R.id.number_of_places_available_value);
 
 
+
         }
     }
 }
