@@ -2,9 +2,13 @@ package ma.ensias.ticket_me.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -37,7 +41,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TicketCreation extends AppCompatActivity {
-
+    public static final int PERMISSION_WRITE = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +57,7 @@ public class TicketCreation extends AppCompatActivity {
         List<String> categoriesSpinner = new ArrayList<String>();
         APIInterface apiInterface = APIClient.createService(APIInterface.class);
         Call<ResponseCategories> call = apiInterface.getCategories2(1);
+        checkPermission();
         call.enqueue(new Callback<ResponseCategories>() {
             @Override
             public void onResponse(Call<ResponseCategories> call, Response<ResponseCategories> response) {
@@ -98,7 +103,7 @@ public class TicketCreation extends AppCompatActivity {
                         reqBody.put("event","1");
                         reqBody.put("category",categoriesId.get(categories.getSelectedItemPosition()));
                         // to update when linking with user session
-                        reqBody.put("event","1");
+                        reqBody.put("user_creation","1");
                         Call<ResponseBody> tcall = apiInterface.createTicket(reqBody);
                         tcall.enqueue(new Callback<ResponseBody>() {
                             @Override
@@ -145,5 +150,23 @@ public class TicketCreation extends AppCompatActivity {
                 alert.show();
             }
         });
+
+    }
+    //runtime storage permission
+    public boolean checkPermission()
+    {
+        int READ_EXTERNAL_PERMISSION = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        if((READ_EXTERNAL_PERMISSION != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_WRITE);
+            return false;
+        }
+        return true;
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode==PERMISSION_WRITE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            //do somethings
+        }
     }
 }
