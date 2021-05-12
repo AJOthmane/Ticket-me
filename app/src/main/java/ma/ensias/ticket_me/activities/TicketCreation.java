@@ -4,7 +4,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,6 +19,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +31,7 @@ import ma.ensias.ticket_me.api.APIClient;
 import ma.ensias.ticket_me.api.APIInterface;
 import ma.ensias.ticket_me.response.ResponseCategories;
 import ma.ensias.ticket_me.response.ResponseTicket;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -78,9 +88,51 @@ public class TicketCreation extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // to replace later
-                        finish();
-                        Toast.makeText(getApplicationContext(),"you choose yes action for alertbox",
-                                Toast.LENGTH_SHORT).show();
+                        //finish();
+                        HashMap<String,String> reqBody = new HashMap<>();
+                        reqBody.put("cin",cin.getText().toString());
+                        reqBody.put("nom",nom.getText().toString());
+                        reqBody.put("prenom",prenom.getText().toString());
+                        reqBody.put("email",email.getText().toString());
+                        // to update when linking with other activities
+                        reqBody.put("event","1");
+                        reqBody.put("category",categoriesId.get(categories.getSelectedItemPosition()));
+                        // to update when linking with user session
+                        reqBody.put("event","1");
+                        Call<ResponseBody> tcall = apiInterface.createTicket(reqBody);
+                        tcall.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                Bitmap ticket = BitmapFactory.decodeStream(response.body().byteStream());
+                                String fileUri = "";
+                                try {
+                                    File mydir = new File(Environment.getExternalStorageDirectory() + "/ticketme");
+                                    if (!mydir.exists()) {
+                                        mydir.mkdirs();
+                                    }
+
+                                    fileUri = mydir.getAbsolutePath() + File.separator + System.currentTimeMillis() + ".jpg";
+                                    FileOutputStream outputStream = new FileOutputStream(fileUri);
+
+                                    ticket.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                                    outputStream.flush();
+                                    outputStream.close();
+                                } catch(IOException e) {
+                                    e.printStackTrace();
+                                }
+                                Uri uri= Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), BitmapFactory.decodeFile(fileUri),null,null));
+                                // use intent to share image
+                                Intent share = new Intent(Intent.ACTION_SEND);
+                                share.setType("image/*");
+                                share.putExtra(Intent.EXTRA_STREAM, uri);
+                                startActivity(Intent.createChooser(share, "Share Image"));
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                            }
+                        });
                     }
                 });
                 builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {

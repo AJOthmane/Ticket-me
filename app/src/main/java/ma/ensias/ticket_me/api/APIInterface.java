@@ -15,6 +15,7 @@ import ma.ensias.ticket_me.response.ResponseEvent;
 import ma.ensias.ticket_me.response.ResponseSignUp;
 import ma.ensias.ticket_me.requests.RequestEvent;
 import ma.ensias.ticket_me.response.ResponseTicket;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -52,4 +53,7 @@ public interface APIInterface {
 
     @GET("categories")
     Call<ResponseCategories> getCategories2(@Query("id_event") int event);
+
+    @POST("createticket")
+    Call<ResponseBody> createTicket(@Body HashMap<String,String> ticket);
 }
