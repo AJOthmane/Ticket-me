@@ -13,8 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ticketme">
+        <!--        <activity android:name=".activities.EventsTestActivity"></activity>-->
         <activity android:name=".activities.StatsActivity"></activity>
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBBF0w3TdZL_Hup2XsN_95-RQ_SvF4xfnk" />
@@ -23,7 +23,7 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".activities.EventActivity"></activity>
+        <activity android:name=".activities.EventActivity" />
         <activity
             android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps" />
@@ -31,7 +31,7 @@
         <activity android:name=".TicketCreation" />
         <activity android:name=".TicketCheck" />
         <activity android:name=".QrScanner" />
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.EventsTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
