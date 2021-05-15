@@ -59,7 +59,7 @@ public class EventActivity extends AppCompatActivity {
         categories.setLayoutManager(new LinearLayoutManager(this));
         categories.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL));
-        loadDate();
+        loadData();
 
         add.setOnClickListener(v -> {
 
@@ -69,7 +69,7 @@ public class EventActivity extends AppCompatActivity {
 
         });
     }
-    public void loadDate()
+    public void loadData()
     {
         APIInterface apiInterface = APIClient.createService(APIInterface.class);
         Call<ResponseListCategory> call_Category = apiInterface.getCategories(idEvent);
@@ -83,7 +83,6 @@ public class EventActivity extends AppCompatActivity {
                         categoriesList = response.body();
                         categories.setAdapter(new AdapterCategory(categoriesList.getListOfEvents(), getApplicationContext()));
                     }
-
                 }
                 else
                 {
@@ -95,7 +94,6 @@ public class EventActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseListCategory> call, Throwable t)
             {
-
                 Log.e("error_event","Error connexion with api");
             }
         });
@@ -134,5 +132,37 @@ public class EventActivity extends AppCompatActivity {
                 Log.e("error_event","Error connexion with api");
             }
         });
+    }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        APIInterface apiInterface = APIClient.createService(APIInterface.class);
+        Call<ResponseListCategory> call_Category = apiInterface.getCategories(idEvent);
+        call_Category.enqueue(new Callback<ResponseListCategory>() {
+            @Override
+            public void onResponse(Call<ResponseListCategory> call, Response<ResponseListCategory> response) {
+                if(response.code() == 200)
+                {
+                    if(response.body().getListOfEvents() != null)
+                    {
+                        categoriesList = response.body();
+                        categories.setAdapter(new AdapterCategory(categoriesList.getListOfEvents(), getApplicationContext()));
+                    }
+                }
+                else
+                {
+                    Log.e("error_event","No event with the id given");
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseListCategory> call, Throwable t)
+            {
+                Log.e("error_event","Error connexion with api");
+            }
+        });
+
     }
 }

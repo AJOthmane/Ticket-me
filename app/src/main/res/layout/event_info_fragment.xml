@@ -13,7 +13,8 @@
 
         <TextView
             android:id="@+id/textView6"
-            style="@style/label"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/nameOfEvent"
@@ -36,7 +37,8 @@
 
         <TextView
             android:id="@+id/textView7"
-            style="@style/label"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dateofevent"
@@ -60,7 +62,8 @@
 
         <TextView
             android:id="@+id/textView9"
-            style="@style/label"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/timeEvent"
@@ -116,6 +119,8 @@
             app:layout_constraintGuide_begin="114dp" />
 
         <Button
+            app:backgroundTint="@null"
+            android:background="@android:color/holo_red_dark"
             android:id="@+id/button_creation_event_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

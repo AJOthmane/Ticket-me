@@ -41,8 +41,6 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.ViewHo
         holder.name.setText(category.getName());
         holder.places.setText(category.getNumberOfPlaces()+" Places");
         holder.price.setText(category.getPrice()+" DH");
-
-
     }
 
     @Override
@@ -61,8 +59,6 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.ViewHo
             name = itemView.findViewById(R.id.name_value);
             price = itemView.findViewById(R.id.price_value);
             places = itemView.findViewById(R.id.number_of_places_available_value);
-
-
 
         }
     }

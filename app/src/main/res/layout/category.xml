@@ -7,6 +7,7 @@
 
     <TextView
         android:id="@+id/name_label"
+        android:textColor="@android:color/holo_red_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -27,6 +28,7 @@
 
     <TextView
         android:id="@+id/price_label"
+        android:textColor="@android:color/holo_red_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -47,6 +49,7 @@
 
     <TextView
         android:id="@+id/number_of_places_available_label"
+        android:textColor="@android:color/holo_red_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"

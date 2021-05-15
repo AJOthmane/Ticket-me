@@ -41,7 +41,10 @@
         <activity android:name=".TicketCreation" />
         <activity android:name=".TicketCheck" />
         <activity android:name=".QrScanner" />
-        <activity android:name=".activities.MainActivity"></activity>
+        <activity android:name=".activities.MainActivity">
+
+
+        </activity>
     </application>
 
 </manifest>

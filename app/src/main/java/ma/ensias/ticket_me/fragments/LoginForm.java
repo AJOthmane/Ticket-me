@@ -93,7 +93,7 @@ public class LoginForm extends Fragment {
                             if(response.code() == 401)
                             {
                                 progress.dismiss();
-                                Snackbar.make(getView(), "Username et mot de passe incorrect", Snackbar.LENGTH_LONG).show();
+                                Snackbar.make(getView(), "Username ou mot de passe incorrect", Snackbar.LENGTH_LONG).show();
                             }
                         }
                     }
