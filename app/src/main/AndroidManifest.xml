@@ -26,11 +26,7 @@
             android:name=".activities.ListOfEventsActivity"
             android:label="@string/title_activity_list_of_events"
             android:theme="@style/Theme.Ticketme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity android:name=".activities.EventActivity" />
@@ -42,7 +38,11 @@
         <activity android:name=".TicketCheck" />
         <activity android:name=".QrScanner" />
         <activity android:name=".activities.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
     </application>
