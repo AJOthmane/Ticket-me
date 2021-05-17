@@ -13,8 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ticketme">
-        <!--        <activity android:name=".activities.EventsTestActivity"></activity>-->
+        <activity android:name=".activities.MainActivity"></activity>
         <activity android:name=".activities.StatsActivity"></activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBBF0w3TdZL_Hup2XsN_95-RQ_SvF4xfnk" />

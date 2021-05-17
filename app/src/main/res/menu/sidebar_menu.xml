@@ -5,16 +5,34 @@
 
         <item
             android:id="@+id/item1"
-            android:title="item 1" />
+            android:title="Home" />
 
         <item
             android:id="@+id/item2"
-            android:title="item 2" />
+            android:title="Events" />
 
         <item
             android:id="@+id/item3"
-            android:title="item 3" />
+            android:title="Test Page" />
 
     </group>
+
+    <item android:title="App">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/settings"
+                    android:icon="@drawable/settings_icon"
+                    android:title="Settings" />
+
+                <item
+                    android:id="@+id/version"
+                    android:icon="@drawable/info_icon"
+                    android:title="Version" />
+
+            </group>
+        </menu>
+    </item>
 
 </menu>
