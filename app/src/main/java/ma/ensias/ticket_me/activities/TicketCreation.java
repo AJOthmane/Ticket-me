@@ -1,11 +1,16 @@
 package ma.ensias.ticket_me.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -26,6 +31,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -109,28 +115,16 @@ public class TicketCreation extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                 Bitmap ticket = BitmapFactory.decodeStream(response.body().byteStream());
-                                String fileUri = "";
+                                Uri uri = null;
                                 try {
-                                    File mydir = new File(Environment.getExternalStorageDirectory() + "/ticketme");
-                                    if (!mydir.exists()) {
-                                        mydir.mkdirs();
-                                    }
-
-                                    fileUri = mydir.getAbsolutePath() + File.separator + System.currentTimeMillis() + ".jpg";
-                                    FileOutputStream outputStream = new FileOutputStream(fileUri);
-
-                                    ticket.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-                                    outputStream.flush();
-                                    outputStream.close();
-                                } catch(IOException e) {
+                                    uri = saveBitmap(getApplicationContext(),ticket, Bitmap.CompressFormat.JPEG,"image/png","ticket");
+                                } catch (IOException e) {
                                     e.printStackTrace();
                                 }
-                                Uri uri= Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), BitmapFactory.decodeFile(fileUri),null,null));
-                                // use intent to share image
                                 Intent share = new Intent(Intent.ACTION_SEND);
                                 share.setType("image/*");
                                 share.putExtra(Intent.EXTRA_STREAM, uri);
-                                startActivity(Intent.createChooser(share, "Share Image"));
+                                startActivity(Intent.createChooser(share, "Partager le ticket"));
                             }
 
                             @Override
@@ -167,6 +161,48 @@ public class TicketCreation extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode==PERMISSION_WRITE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             //do somethings
+        }
+    }
+
+    @NonNull
+    public Uri saveBitmap(@NonNull final Context context, @NonNull final Bitmap bitmap,
+                          @NonNull final Bitmap.CompressFormat format,
+                          @NonNull final String mimeType,
+                          @NonNull final String displayName) throws IOException {
+
+        final ContentValues values = new ContentValues();
+        values.put(MediaStore.MediaColumns.DISPLAY_NAME, displayName);
+        values.put(MediaStore.MediaColumns.MIME_TYPE, mimeType);
+        values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DCIM);
+
+        final ContentResolver resolver = context.getContentResolver();
+        Uri uri = null;
+
+        try {
+            final Uri contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+            uri = resolver.insert(contentUri, values);
+
+            if (uri == null)
+                throw new IOException("Failed to create new MediaStore record.");
+
+            try (final OutputStream stream = resolver.openOutputStream(uri)) {
+                if (stream == null)
+                    throw new IOException("Failed to open output stream.");
+
+                if (!bitmap.compress(format, 95, stream))
+                    throw new IOException("Failed to save bitmap.");
+            }
+
+            return uri;
+        }
+        catch (IOException e) {
+
+            if (uri != null) {
+                // Don't leave an orphan entry in the MediaStore
+                resolver.delete(uri, null, null);
+            }
+
+            throw e;
         }
     }
 }
