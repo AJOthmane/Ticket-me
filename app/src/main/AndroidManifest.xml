@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ticketme">
+        <activity android:name=".activities.Home"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -25,10 +26,7 @@
         <activity
             android:name=".activities.ListOfEventsActivity"
             android:label="@string/title_activity_list_of_events"
-            android:theme="@style/Theme.Ticketme.NoActionBar">
-
-
-        </activity>
+            android:theme="@style/Theme.Ticketme.NoActionBar"></activity>
         <activity android:name=".activities.EventActivity" />
         <activity
             android:name=".activities.MapsActivity"
@@ -43,7 +41,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 
