@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor ed = sp.edit();
         if(sp.getInt("ID_SESSION",0) >  0)
         {
-            Intent intent = new Intent(this,CreationEvent.class);
+            Intent intent = new Intent(this,ListOfEventsActivity.class);
             startActivity(intent);
         }
 

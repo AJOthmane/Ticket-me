@@ -20,6 +20,7 @@ import java.util.HashMap;
 
 import ma.ensias.ticket_me.R;
 import ma.ensias.ticket_me.activities.CreationEvent;
+import ma.ensias.ticket_me.activities.ListOfEventsActivity;
 import ma.ensias.ticket_me.activities.MainActivity;
 import ma.ensias.ticket_me.api.APIClient;
 import ma.ensias.ticket_me.api.APIInterface;
@@ -85,7 +86,7 @@ public class LoginForm extends Fragment {
                                 SharedPreferences.Editor edit = sp.edit();
                                 edit.putInt("ID_SESSION",response.body().getId());
                                 edit.commit();
-                                Intent i = new Intent(getActivity(), CreationEvent.class);
+                                Intent i = new Intent(getActivity(), ListOfEventsActivity.class);
                                 startActivity(i);
                             }
                         }

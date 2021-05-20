@@ -36,12 +36,14 @@ public class ListEventsFragment extends Fragment {
 
 
     private boolean admin;
+    private int ID_SESSION;
     public RecyclerView viewEvents;
     public View v;
 
 
-    public ListEventsFragment(boolean admin)  {
+    public ListEventsFragment(boolean admin,int ID_SESSION)  {
         this.admin = admin;
+        this.ID_SESSION = ID_SESSION;
 
     }
     @Override
@@ -64,7 +66,7 @@ public class ListEventsFragment extends Fragment {
         APIInterface apiInterface = APIClient.createService(APIInterface.class);
         Call<ResponseListEvents> call_event = null;
         if(admin)
-            call_event = apiInterface.getEventadmin(1);
+            call_event = apiInterface.getEventadmin(ID_SESSION);
         else
             call_event = apiInterface.getEvents();
 
@@ -112,7 +114,7 @@ public class ListEventsFragment extends Fragment {
         APIInterface apiInterface = APIClient.createService(APIInterface.class);
         Call<ResponseListEvents> call_event = null;
         if(admin)
-            call_event = apiInterface.getEventadmin(1);
+            call_event = apiInterface.getEventadmin(ID_SESSION);
         else
             call_event = apiInterface.getEvents();
 
