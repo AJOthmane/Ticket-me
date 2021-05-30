@@ -128,6 +128,10 @@ public class TicketCreation extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                                 pgsBar.setVisibility(View.GONE);
+                                nom.setText("");
+                                prenom.setText("");
+                                email.setText("");
+                                cin.setText("");
                                 Intent share = new Intent(Intent.ACTION_SEND);
                                 share.setType("image/*");
                                 share.putExtra(Intent.EXTRA_STREAM, uri);
