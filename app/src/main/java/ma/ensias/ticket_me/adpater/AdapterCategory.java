@@ -2,9 +2,11 @@ package ma.ensias.ticket_me.adpater;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,41 +27,45 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.ViewHo
     {
         this.categories = categories;
         this.context = context;
-
     }
-
     @NonNull
     @Override
     public AdapterCategory.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.category,parent,false);
         return new ViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull AdapterCategory.ViewHolder holder, int position) {
         CategoryTicket category = this.categories.get(position);
         holder.name.setText(category.getName());
-        holder.places.setText(category.getNumberOfPlaces());
+        holder.places.setText(category.getNumberOfPlaces()+" Places");
         holder.price.setText(category.getPrice()+" DH");
-
-
+        holder.statistics.setOnClickListener(v -> {
+           // Intent i = new Intent()
+           // holder.button_explore.getContext().startActivity(intent)
+        });
     }
 
     @Override
     public int getItemCount() {
+
         return categories.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView name,places,price;
+        private ImageView statistics;
 
         public ViewHolder(final View itemView) {
+
             super(itemView);
             name = itemView.findViewById(R.id.name_value);
             price = itemView.findViewById(R.id.price_value);
             places = itemView.findViewById(R.id.number_of_places_available_value);
+            statistics = itemView.findViewById(R.id.icon_chart);
 
         }
     }

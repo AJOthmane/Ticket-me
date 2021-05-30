@@ -41,6 +41,9 @@
     <string name="ticket_creation_confirmation_title">Confirmation de création de ticket</string>
     <string name="ticket_creation_confirmation_content">Etes-vous sûr de vouloir créer le ticket </string>
     <string name="please_scan_qr">Veuillez scanner le ticket</string>
+    <string name="title_activity_list_of_events">ListOfEventsActivity</string>
+    <string name="tab_text_1">My events</string>
+    <string name="tab_text_2">Other events</string>
 
     <string name="num_ticket">Numéro du ticket</string>
     <string name="num_ticket2">Numéro</string>

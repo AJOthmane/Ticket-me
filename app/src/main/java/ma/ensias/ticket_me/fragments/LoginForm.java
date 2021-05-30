@@ -1,5 +1,6 @@
 package ma.ensias.ticket_me.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 
 import ma.ensias.ticket_me.R;
 import ma.ensias.ticket_me.activities.CreationEvent;
+import ma.ensias.ticket_me.activities.ListOfEventsActivity;
 import ma.ensias.ticket_me.activities.MainActivity;
 import ma.ensias.ticket_me.api.APIClient;
 import ma.ensias.ticket_me.api.APIInterface;
@@ -50,6 +52,7 @@ public class LoginForm extends Fragment {
         loginButton = loginView.findViewById(R.id.login_button);
 
         loginButton.setOnClickListener(v -> {
+
             String usernameText = username.getText().toString();
             String passwordText = password.getText().toString();
             if(usernameText.isEmpty() || passwordText.isEmpty())
@@ -58,6 +61,14 @@ public class LoginForm extends Fragment {
             }
             else
             {
+
+                ProgressDialog progress = new ProgressDialog(this.getContext());
+                progress.setTitle("Connexion");
+                progress.setMessage("Wait while Connecting...");
+                progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+                progress.show();
+
+
                 APIInterface apiInterface = APIClient.createService(APIInterface.class);
                 HashMap<String,String> cred = new HashMap<>();
                 cred.put(MainActivity.USERNAME_FIELD,usernameText);
@@ -69,21 +80,22 @@ public class LoginForm extends Fragment {
 
                         if(response.isSuccessful())
                         {
-
                             if(response.body().isAuth())
                             {
                                 SharedPreferences sp = getActivity().getSharedPreferences(SESSION_SP_NAME, Context.MODE_PRIVATE);
                                 SharedPreferences.Editor edit = sp.edit();
                                 edit.putInt("ID_SESSION",response.body().getId());
                                 edit.commit();
-                                Intent i = new Intent(getActivity(), CreationEvent.class);
+                                Intent i = new Intent(getActivity(), ListOfEventsActivity.class);
                                 startActivity(i);
                             }
-
                         }
                         else {
                             if(response.code() == 401)
-                                Snackbar.make(getView(), "Username et mot de passe incorrect", Snackbar.LENGTH_LONG).show();
+                            {
+                                progress.dismiss();
+                                Snackbar.make(getView(), "Username ou mot de passe incorrect", Snackbar.LENGTH_LONG).show();
+                            }
                         }
                     }
 

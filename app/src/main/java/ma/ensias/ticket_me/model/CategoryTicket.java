@@ -1,15 +1,17 @@
 package ma.ensias.ticket_me.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class CategoryTicket {
-
+    @SerializedName("id_categorie")
     private int id;
-
+    @SerializedName("nom_categorie")
     private String name;
 
     private String picture;
-
+    @SerializedName("prix_categorie")
     private Double price;
-
+    @SerializedName("nbr_places")
     private int numberOfPlaces;
 
     private Event event;
