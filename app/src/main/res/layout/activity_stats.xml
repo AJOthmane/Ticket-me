@@ -23,15 +23,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,6 +47,69 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <co.ceryle.segmentedbutton.SegmentedButtonGroup
+            android:id="@+id/segmBtnGrp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:sbg_animateSelector="bounce"
+            app:sbg_animateSelectorDuration="200"
+            app:sbg_backgroundColor="@color/white"
+            app:sbg_dividerColor="@color/black"
+            app:sbg_dividerPadding="10dp"
+            app:sbg_dividerSize="1dp"
+            app:sbg_position="1"
+            app:sbg_radius="2dp"
+            app:sbg_ripple="true"
+            app:sbg_rippleColor="@android:color/holo_red_light"
+            app:sbg_selectorColor="@android:color/holo_red_light"
+            app:sbg_selectorTextColor="@color/white"
+            app:sbg_shadow="true"
+            app:sbg_shadowElevation="3dp"
+            app:sbg_shadowMargin="4dp">
+
+            <Button
+                android:id="@+id/btnWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="10dp"
+                android:text="Week"
+                android:textAllCaps="true"
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/btnMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="10dp"
+                android:text="Month"
+                android:textAllCaps="true"
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/btnAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="10dp"
+                android:text="All"
+                android:textAllCaps="true"
+                android:textColor="@color/black" />
+
+        </co.ceryle.segmentedbutton.SegmentedButtonGroup>
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/segmBtnGrp"
+            app:layout_constraintVertical_bias="0.100000024" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

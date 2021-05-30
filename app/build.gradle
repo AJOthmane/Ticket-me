@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "ma.ensias.ticket_me"
         minSdkVersion 19
-        targetSdkVersion 30
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
 
@@ -36,6 +36,8 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.navigation:navigation-fragment:2.3.3'
     implementation 'androidx.navigation:navigation-ui:2.3.3'
+    implementation 'androidx.room:room-runtime:2.4.0-alpha02'
+    implementation 'androidx.room:room-compiler:2.4.0-alpha02'
 
 
     testImplementation 'junit:junit:4.13'
@@ -59,5 +61,10 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-places:17.0.0'
 
+    //Library for Ceryle
+    implementation 'com.github.ceryle:SegmentedButton:1.0'
+
+    //Library for MPAndroidChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
 }

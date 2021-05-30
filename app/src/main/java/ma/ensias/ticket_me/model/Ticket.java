@@ -1,19 +1,26 @@
 package ma.ensias.ticket_me.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public  class Ticket {
 
+    @SerializedName("id_ticket")
     private int id;
 
+    @SerializedName("id_event")
     private Event event;
 
     private CategoryTicket category;
 
+    @SerializedName("date_creation_ticket")
     private Date dateOfCreation;
 
+    @SerializedName("date_consumed_ticket")
     private Date dateofConsumed;
 
+    @SerializedName("cin_client")
     private int cinClient;
 
     private String nomClient;

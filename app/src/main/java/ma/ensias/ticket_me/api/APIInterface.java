@@ -7,6 +7,7 @@ import java.util.List;
 
 import ma.ensias.ticket_me.model.CategoryTicket;
 import ma.ensias.ticket_me.model.Event;
+import ma.ensias.ticket_me.model.Ticket;
 import ma.ensias.ticket_me.requests.RequestCategory;
 import ma.ensias.ticket_me.response.ResponseCategory;
 import ma.ensias.ticket_me.response.ResponseLogin;
@@ -40,4 +41,7 @@ public interface APIInterface {
 
     @GET("event")
     Call<Event> getEvent(@Body int key_event);
+
+    @POST("stats")
+    Call<LinkedList<Ticket>> getTickets(@Body HashMap<String,Integer> infos);
 }
