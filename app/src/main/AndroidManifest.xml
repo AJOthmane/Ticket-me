@@ -36,14 +36,14 @@
         <activity android:name=".activities.CreationEvent" />
 
         <activity android:name=".activities.TicketCreation">
+
+        </activity>
+        <activity android:name=".activities.TicketCheck" />
+        <activity android:name=".activities.QrScanner" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".activities.TicketCheck" />
-        <activity android:name=".activities.QrScanner" >
-
         </activity>
 
         <activity android:name=".activities.MainActivity">

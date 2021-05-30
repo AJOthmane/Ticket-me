@@ -29,6 +29,12 @@ public class TicketCheck extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_check);
+
+        // intergration prep work
+        int event = 1;
+        int id = 1;
+
+
         TextView ticketNumber = (TextView) findViewById(R.id.numero);
         TextView ticketOwner = (TextView) findViewById(R.id.nom);
         TextView ticketCategory = (TextView) findViewById(R.id.categorie);
@@ -55,7 +61,11 @@ public class TicketCheck extends AppCompatActivity {
                     ticketOwner.setText(response.body().getTicket("NOM")+" "+response.body().getTicket("PRENOM"));
                     ticketCin.setText(response.body().getTicket("CIN"));
                     ticketCategory.setText(response.body().getTicket("CATEGORIE"));
-                    if(response.body().getTicket("DATE") == null)
+                    if(!Integer.toString(event).equals(response.body().getTicket("EVENT")))
+                    {
+                        ticketState.setText("Ce ticket est pour un autre event");
+                    }
+                    else if(response.body().getTicket("DATE") == null)
                     {
                         ticketState.setText("Ce ticket est valide");
                         validationButton.setEnabled(true);
