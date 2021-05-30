@@ -53,6 +53,14 @@ public class TicketCreation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_creation);
+
+        // integration prep work
+        int event = 1;
+        int id = 1;
+
+
+
+
         EditText cin = (EditText) findViewById(R.id.ccin);
         EditText nom = (EditText) findViewById(R.id.cnom);
         EditText prenom = (EditText) findViewById(R.id.cprenom);
@@ -64,7 +72,7 @@ public class TicketCreation extends AppCompatActivity {
         List<String> categoriesId = new ArrayList<String>();
         List<String> categoriesSpinner = new ArrayList<String>();
         APIInterface apiInterface = APIClient.createService(APIInterface.class);
-        Call<ResponseCategories> call = apiInterface.getCategories2(1);
+        Call<ResponseCategories> call = apiInterface.getCategories2(event);
         checkPermission();
         call.enqueue(new Callback<ResponseCategories>() {
             @Override
@@ -111,11 +119,9 @@ public class TicketCreation extends AppCompatActivity {
                         reqBody.put("nom",nom.getText().toString());
                         reqBody.put("prenom",prenom.getText().toString());
                         reqBody.put("email",email.getText().toString());
-                        // to update when linking with other activities
-                        reqBody.put("event","1");
+                        reqBody.put("event",Integer.toString(event));
                         reqBody.put("category",categoriesId.get(categories.getSelectedItemPosition()));
-                        // to update when linking with user session
-                        reqBody.put("user_creation","1");
+                        reqBody.put("user_creation",Integer.toString(id));
                         Call<ResponseBody> tcall = apiInterface.createTicket(reqBody);
                         tcall.enqueue(new Callback<ResponseBody>() {
                             @Override
