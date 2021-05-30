@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QrScanner">
+    tools:context=".activities.QrScanner">
     <com.budiyev.android.codescanner.CodeScannerView
         android:id="@+id/scanner_view"
         android:layout_width="match_parent"
@@ -28,6 +28,6 @@
          android:layout_below="@id/scanner_view"
          android:layout_centerHorizontal="true"
          android:layout_margin="20dp"
-         android:text="Veuillez scanner le ticket"
+         android:text="@string/please_scan_qr"
          android:textColor="@color/black"/>
 </RelativeLayout>

@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -25,6 +27,7 @@ import ma.ensias.ticket_me.dialog.CategoryCreationDialog;
 import ma.ensias.ticket_me.R;
 import ma.ensias.ticket_me.api.APIClient;
 import ma.ensias.ticket_me.api.APIInterface;
+import ma.ensias.ticket_me.fragments.LoginForm;
 import ma.ensias.ticket_me.model.CategoryTicket;
 import ma.ensias.ticket_me.model.Event;
 import ma.ensias.ticket_me.response.ResponseEventInfo;
@@ -40,7 +43,7 @@ public class EventActivity extends AppCompatActivity {
     protected int idEvent;
     protected ResponseEventInfo event;
     protected TextView  date_event,empty;
-    protected Button name_of_event,location;
+    protected Button name_of_event,location,ticketCreation,ticketValidation;
     protected RecyclerView categories;
     protected ResponseListCategory categoriesList;
 
@@ -54,6 +57,8 @@ public class EventActivity extends AppCompatActivity {
         name_of_event = (Button) findViewById(R.id.name_event);
         date_event = (TextView) findViewById(R.id.date_values);
         location = (Button)findViewById(R.id.location_button);
+        ticketCreation = (Button)findViewById(R.id.ticketcreation);
+        ticketValidation = (Button)findViewById(R.id.ticketvalidation);
         add = findViewById(R.id.add_category);
         categories = findViewById(R.id.list_categorie);
         categories.setLayoutManager(new LinearLayoutManager(this));
@@ -67,6 +72,25 @@ public class EventActivity extends AppCompatActivity {
             ccd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             ccd.show();
 
+        });
+        ticketValidation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), QrScanner.class);
+                intent.putExtra("event",idEvent);
+                startActivity(intent);
+            }
+        });
+        ticketCreation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences(LoginForm.SESSION_SP_NAME, Context.MODE_PRIVATE);
+                int idUser = sharedPreferences.getInt("ID_SESSION",-1);
+                Intent intent = new Intent(getBaseContext(), TicketCreation.class);
+                intent.putExtra("event",idEvent);
+                intent.putExtra("id",idUser);
+                startActivity(intent);
+            }
         });
     }
     public void loadData()

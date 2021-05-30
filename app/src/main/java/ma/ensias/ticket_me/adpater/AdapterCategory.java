@@ -2,6 +2,7 @@ package ma.ensias.ticket_me.adpater;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,17 +42,22 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.ViewHo
         holder.name.setText(category.getName());
         holder.places.setText(category.getNumberOfPlaces()+" Places");
         holder.price.setText(category.getPrice()+" DH");
+        holder.statistics.setOnClickListener(v -> {
+           // Intent i = new Intent()
+           // holder.button_explore.getContext().startActivity(intent)
+        });
     }
 
     @Override
     public int getItemCount() {
+
         return categories.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView name,places,price;
-        private ImageView button;
+        private ImageView statistics;
 
         public ViewHolder(final View itemView) {
 
@@ -59,6 +65,7 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.ViewHo
             name = itemView.findViewById(R.id.name_value);
             price = itemView.findViewById(R.id.price_value);
             places = itemView.findViewById(R.id.number_of_places_available_value);
+            statistics = itemView.findViewById(R.id.icon_chart);
 
         }
     }

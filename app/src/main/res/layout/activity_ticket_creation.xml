@@ -4,22 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TicketCreation">
+    tools:context=".activities.TicketCreation">
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/ccin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:ems="10"
-        android:hint="CIN"
+        android:hint="@string/cin"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/cnom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -28,53 +28,63 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-        android:hint="Nom"
+        app:layout_constraintTop_toBottomOf="@+id/ccin"
+        android:hint="@string/owner_name2"
         />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/cemail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3"
-        android:hint="Email"
+        app:layout_constraintEnd_toEndOf="@+id/cnom"
+        app:layout_constraintStart_toStartOf="@+id/cnom"
+        app:layout_constraintTop_toBottomOf="@+id/cprenom"
+        android:hint="@string/ticket_email"
         />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/creerTicket"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Créer ticket"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextEmailAddress"
+        android:text="@string/create_ticket"
+        app:layout_constraintEnd_toEndOf="@+id/cemail"
         app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintStart_toStartOf="@+id/cemail"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
+    <ProgressBar
+        android:id="@+id/progBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        style="?android:attr/progressBarStyleLarge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/creerTicket">
+    </ProgressBar>
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/cprenom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
-        android:hint="Prénom"/>
+        app:layout_constraintEnd_toEndOf="@+id/cnom"
+        app:layout_constraintStart_toStartOf="@+id/cnom"
+        app:layout_constraintTop_toBottomOf="@+id/cnom"
+        android:hint="@string/owner_fname"/>
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintEnd_toEndOf="@+id/cemail"
+        app:layout_constraintStart_toStartOf="@+id/cemail"
+        app:layout_constraintTop_toBottomOf="@+id/cemail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

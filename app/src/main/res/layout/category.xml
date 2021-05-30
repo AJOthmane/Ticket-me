@@ -69,4 +69,15 @@
         app:layout_constraintStart_toEndOf="@+id/number_of_places_available_label"
         app:layout_constraintTop_toBottomOf="@+id/price_value" />
 
+    <ImageView
+        android:id="@+id/icon_chart"
+        android:layout_width="64dp"
+        android:layout_height="43dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.913"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/number_of_places_available_label"
+        app:srcCompat="@drawable/ic_chart"
+        tools:ignore="VectorDrawableCompat" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

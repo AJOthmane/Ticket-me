@@ -42,15 +42,15 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        //mContext.getSharedPreferences( "LoginForm",Context.MODE_PRIVATE).getInt("ID_SESSION",1);
+        int ID_SESSION = mContext.getSharedPreferences( "LoginForm",Context.MODE_PRIVATE).getInt("ID_SESSION",-1);
         Fragment frg = null;
 
         switch (position) {
             case 0:
-                frg = new ListEventsFragment(true);
+                frg = new ListEventsFragment(true,ID_SESSION);
                 break;
             case 1:
-                frg = new ListEventsFragment(false);
+                frg = new ListEventsFragment(false,ID_SESSION);
         }
 
         return frg;
