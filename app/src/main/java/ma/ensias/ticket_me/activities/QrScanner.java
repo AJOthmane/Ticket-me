@@ -1,4 +1,4 @@
-package ma.ensias.ticket_me;
+package ma.ensias.ticket_me.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,9 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
+
+import ma.ensias.ticket_me.R;
+import ma.ensias.ticket_me.activities.TicketCheck;
 
 public class QrScanner extends AppCompatActivity {
     private CodeScanner mCodeScanner;
