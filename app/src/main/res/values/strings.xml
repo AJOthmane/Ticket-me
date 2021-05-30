@@ -40,4 +40,19 @@
     <string name="name_label">Name of Category</string>
     <string name="ticket_creation_confirmation_title">Confirmation de création de ticket</string>
     <string name="ticket_creation_confirmation_content">Etes-vous sûr de vouloir créer le ticket </string>
+    <string name="please_scan_qr">Veuillez scanner le ticket</string>
+
+    <string name="num_ticket">Numéro du ticket</string>
+    <string name="num_ticket2">Numéro</string>
+    <string name="category">Catégorie</string>
+    <string name="category2">Catégorie</string>
+    <string name="cin">CIN</string>
+    <string name="cin2">cin</string>
+    <string name="owner_name">Nom du propriétaire</string>
+    <string name="owner_name2">Nom</string>
+    <string name="ticket_state">Etat du ticket</string>
+    <string name="validate_ticket">Valider le ticket</string>
+    <string name="ticket_email">Email</string>
+    <string name="create_ticket">Créer le ticket</string>
+    <string name="owner_fname">Prénom</string>
 </resources>

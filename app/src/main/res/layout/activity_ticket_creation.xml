@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:ems="10"
-        android:hint="CIN"
+        android:hint="@string/cin"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ccin"
-        android:hint="Nom"
+        android:hint="@string/owner_name2"
         />
 
     <EditText
@@ -42,7 +42,7 @@
         app:layout_constraintEnd_toEndOf="@+id/cnom"
         app:layout_constraintStart_toStartOf="@+id/cnom"
         app:layout_constraintTop_toBottomOf="@+id/cprenom"
-        android:hint="Email"
+        android:hint="@string/ticket_email"
         />
 
     <Button
@@ -50,7 +50,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Créer ticket"
+        android:text="@string/create_ticket"
         app:layout_constraintEnd_toEndOf="@+id/cemail"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/cemail"
@@ -76,7 +76,7 @@
         app:layout_constraintEnd_toEndOf="@+id/cnom"
         app:layout_constraintStart_toStartOf="@+id/cnom"
         app:layout_constraintTop_toBottomOf="@+id/cnom"
-        android:hint="Prénom"/>
+        android:hint="@string/owner_fname"/>
 
     <Spinner
         android:id="@+id/spinner"
