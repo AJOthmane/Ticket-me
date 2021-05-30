@@ -81,13 +81,14 @@ public class TicketCreation extends AppCompatActivity {
                 }
                 else
                 {
-                    // event dont exist or dont have categories
+                    Toast.makeText(TicketCreation.this, "Server Error", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseCategories> call, Throwable t) {
                 Log.e("Fail : Categories check",t.getMessage());
+                Toast.makeText(TicketCreation.this, "Server is offline", Toast.LENGTH_SHORT).show();
             }
         });
         creer.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +130,7 @@ public class TicketCreation extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                                Toast.makeText(TicketCreation.this, "Server Image Error", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

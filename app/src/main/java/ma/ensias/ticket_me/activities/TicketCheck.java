@@ -69,12 +69,14 @@ public class TicketCheck extends AppCompatActivity {
                 else
                 {
                     ticketState.setText("Ce ticket est inexistant");
+                    ticketState.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseTicket> call, Throwable t) {
                 Log.e("Fail : ticket check",t.getMessage());
+                Toast.makeText(TicketCheck.this, "Server is offline", Toast.LENGTH_SHORT).show();
             }
         });
         validationButton.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +91,7 @@ public class TicketCheck extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Boolean> call, Throwable t) {
-                        Toast.makeText(TicketCheck.this, "Une erreur est apparue", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TicketCheck.this, "Server Error", Toast.LENGTH_SHORT).show();
                     }
                 });
 
