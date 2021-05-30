@@ -15,7 +15,6 @@ import ma.ensias.ticket_me.fragments.LoginForm;
 import ma.ensias.ticket_me.fragments.SignUpForm;
 
 public class Home extends AppCompatActivity {
-
     public static final String USERNAME_FIELD = "username";
     public static final String PASSWORD_FIELD = "password";
 
@@ -30,7 +29,7 @@ public class Home extends AppCompatActivity {
         SharedPreferences.Editor ed = sp.edit();
         if(sp.getInt("ID_SESSION",0) >  0)
         {
-            Intent intent = new Intent(this,CreationEvent.class);
+            Intent intent = new Intent(this,ListOfEventsActivity.class);
             startActivity(intent);
         }
 
