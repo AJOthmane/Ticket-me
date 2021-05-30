@@ -1,3 +1,63 @@
 <resources>
     <string name="app_name">Ticket-me</string>
+    <string name="welcome"> Bienvenue sur Ticket-me </string>
+    <string name="Login">Log in</string>
+    <string name="login_username_hint">Username</string>
+    <string name="login_password_hint">Password</string>
+    <string name="Login_signup">Sign Up</string>
+    <string name="Login_login">Log in</string>
+    <string name="description_image">Content description</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_signup">Sign Up</string>
+    <string name="button_signup">Sign up</string>
+    <string name="button_login">Log in</string>
+    <string name="signup_password_confirmation_hint">Password Confirmation</string>
+    <string name="creer_nouveau_compte">Vous n\'avez pas un compte ? Creer votre compte</string>
+    <string name="create_event">Creation of event</string>
+    <string name="eventInfo">Basic Informations</string>
+    <string name="nameOfEvent">Name</string>
+    <string name="dateofevent">Date</string>
+    <string name="timeEvent">Time</string>
+    <string name="buttonCreationEvent_next">Next</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="header_maps">Chose the location of the event</string>
+    <string name="create_category">Create Category</string>
+    <string name="name_of_category">Name of Category</string>
+    <string name="price_of_category">Price of Category</string>
+    <string name="number_of_places_available">Number of Places</string>
+    <string name="button_create">Create</string>
+    <string name="button_location">Pick a location</string>
+    <string name="title_activity_main">MainActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="show_location">Show Location</string>
+    <string name="name_label">Name of Category</string>
+    <string name="ticket_creation_confirmation_title">Confirmation de création de ticket</string>
+    <string name="ticket_creation_confirmation_content">Etes-vous sûr de vouloir créer le ticket </string>
+    <string name="please_scan_qr">Veuillez scanner le ticket</string>
+    <string name="title_activity_list_of_events">ListOfEventsActivity</string>
+    <string name="tab_text_1">My events</string>
+    <string name="tab_text_2">Other events</string>
+
+    <string name="num_ticket">Numéro du ticket</string>
+    <string name="num_ticket2">Numéro</string>
+    <string name="category">Catégorie</string>
+    <string name="category2">Catégorie</string>
+    <string name="cin">CIN</string>
+    <string name="cin2">cin</string>
+    <string name="owner_name">Nom du propriétaire</string>
+    <string name="owner_name2">Nom</string>
+    <string name="ticket_state">Etat du ticket</string>
+    <string name="validate_ticket">Valider le ticket</string>
+    <string name="ticket_email">Email</string>
+    <string name="create_ticket">Créer le ticket</string>
+    <string name="owner_fname">Prénom</string>
+    <string name="tkCreation">create ticket</string>
+    <string name="tkValidation">Check Ticket</string>
 </resources>
