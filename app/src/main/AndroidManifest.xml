@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ma.ensias.ticket_me">
 
-
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,7 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ticketme">
 
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBBF0w3TdZL_Hup2XsN_95-RQ_SvF4xfnk" />
@@ -24,24 +22,28 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".activities.EventActivity">
-        </activity>
+        <activity
+            android:name=".activities.ListOfEventsActivity"
+            android:label="@string/title_activity_list_of_events"
+            android:theme="@style/Theme.Ticketme.NoActionBar">
 
+
+        </activity>
+        <activity android:name=".activities.EventActivity" />
         <activity
             android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".activities.CreationEvent" />
-
-        <activity android:name=".TicketCreation"></activity>
+        <activity android:name=".TicketCreation" />
         <activity android:name=".TicketCheck" />
         <activity android:name=".QrScanner" />
-
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

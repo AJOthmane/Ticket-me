@@ -78,8 +78,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         alertDialog.setTitle("Done");
                         alertDialog.setMessage("\t\t Key : "+response.body().getKey());
                         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Got it",
-                                (dialog, which) -> dialog.dismiss());
+                                (dialog, which) -> startActivity(new Intent(getApplicationContext(), ListOfEventsActivity.class)));
                         alertDialog.show();
+                        //Intent i = new Intent(getApplicationContext(), ListOfEventsActivity.class);
+                        //startActivity(new Intent(getApplicationContext(), ListOfEventsActivity.class));
                     }
 
                     if(response.code() == 500)

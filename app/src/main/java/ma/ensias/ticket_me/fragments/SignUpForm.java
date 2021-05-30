@@ -1,5 +1,9 @@
 package ma.ensias.ticket_me.fragments;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.HashMap;
 
 import ma.ensias.ticket_me.R;
+import ma.ensias.ticket_me.activities.CreationEvent;
 import ma.ensias.ticket_me.response.ResponseSignUp;
 import ma.ensias.ticket_me.api.APIClient;
 import ma.ensias.ticket_me.api.APIInterface;
@@ -26,6 +31,7 @@ import retrofit2.Response;
 public class SignUpForm extends Fragment {
 
     private static final int PASSWORD_MIN_LENGTH = 6;
+    public static final String SESSION_SP_NAME = "LoginForm";
 
 
     EditText username;
@@ -66,6 +72,12 @@ public class SignUpForm extends Fragment {
             }
             else
             {
+                ProgressDialog progress = new ProgressDialog(this.getContext());
+                progress.setTitle("Connexion");
+                progress.setMessage("Wait while Signing...");
+                progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+                progress.show();
+
                 APIInterface apiInterface = APIClient.createService(APIInterface.class);
                 HashMap<String,String> infos = new HashMap<>();
                 infos.put("username",usernameText);
@@ -79,17 +91,25 @@ public class SignUpForm extends Fragment {
                             if(response.body().getError() == null)
                             {
                                 Snackbar.make(getView(),"Utilisateur est cree",Snackbar.LENGTH_LONG).show();
+                                SharedPreferences sp = getActivity().getSharedPreferences(SESSION_SP_NAME, Context.MODE_PRIVATE);
+                                SharedPreferences.Editor edit = sp.edit();
+                                //edit.putInt("ID_SESSION",response.body().getId()); change response to get id
+                                edit.commit();
+                                Intent i = new Intent(getActivity(), CreationEvent.class);
+                                startActivity(i);
                             }
                             else
                                 Snackbar.make(getView(),response.body().getError(),Snackbar.LENGTH_LONG).show();
                         }
-                        else
+                        else {
+                            progress.dismiss();
                             Log.e("signup message", response.message());
-
+                        }
                     }
                     @Override
                     public void onFailure(Call<ResponseSignUp> call, Throwable t)
                     {
+                        progress.dismiss();
                         Log.e("signup failure", t.getMessage());
                     }
                 });
