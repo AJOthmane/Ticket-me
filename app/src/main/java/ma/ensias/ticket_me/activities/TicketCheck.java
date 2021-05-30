@@ -31,7 +31,7 @@ public class TicketCheck extends AppCompatActivity {
         setContentView(R.layout.activity_ticket_check);
 
         // intergration prep work
-        int event = 1;
+        int event = getIntent().getIntExtra("event",1);
         int id = 1;
 
 
@@ -106,6 +106,7 @@ public class TicketCheck extends AppCompatActivity {
                         Toast.makeText(TicketCheck.this, "Le ticket a été validé avec succes", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(getBaseContext(), QrScanner.class);
+                        intent.putExtra("event",event);
                         Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override

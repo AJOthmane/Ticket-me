@@ -38,6 +38,7 @@ public class QrScanner extends AppCompatActivity {
                     public void run() {
                         Intent intent = new Intent(getBaseContext(), TicketCheck.class);
                         intent.putExtra("code",result.getText());
+                        intent.putExtra("event",getIntent().getIntExtra("event",1));
                         //Toast.makeText(QrScanner.this, result.getText(), Toast.LENGTH_SHORT).show();
                         startActivity(intent);
                     }

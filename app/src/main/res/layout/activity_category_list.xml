@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16sp"
-        app:backgroundTint="@android:color/holo_red_dark"
         android:contentDescription="TODO"
+        app:backgroundTint="@android:color/holo_red_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.988"
@@ -27,10 +27,10 @@
         android:layout_width="match_parent"
         android:layout_height="43dp"
         android:background="@android:color/holo_red_dark"
+        android:clickable="false"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="20dp"
-        android:clickable="false"
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -135,6 +135,34 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <Button
+        android:id="@+id/ticketcreation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tkCreation"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/location_button"
+        app:layout_constraintEnd_toStartOf="@+id/ticketvalidation"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/location_button"
+        app:layout_constraintTop_toTopOf="@+id/location_button"
+        app:backgroundTint="@null"
+        />
+
+    <Button
+        android:id="@+id/ticketvalidation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tkValidation"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ticketcreation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ticketcreation"
+        app:layout_constraintTop_toTopOf="@+id/ticketcreation"
+        app:backgroundTint="@null"
+    />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

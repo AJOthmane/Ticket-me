@@ -55,8 +55,8 @@ public class TicketCreation extends AppCompatActivity {
         setContentView(R.layout.activity_ticket_creation);
 
         // integration prep work
-        int event = 1;
-        int id = 1;
+        int event = getIntent().getIntExtra("event",1);
+        int id = getIntent().getIntExtra("id",1);
 
 
 

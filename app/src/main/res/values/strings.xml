@@ -58,4 +58,6 @@
     <string name="ticket_email">Email</string>
     <string name="create_ticket">Créer le ticket</string>
     <string name="owner_fname">Prénom</string>
+    <string name="tkCreation">create ticket</string>
+    <string name="tkValidation">Check Ticket</string>
 </resources>
