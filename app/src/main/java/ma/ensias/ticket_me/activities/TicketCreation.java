@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -58,6 +59,7 @@ public class TicketCreation extends AppCompatActivity {
         EditText email = (EditText) findViewById(R.id.cemail);
         Spinner categories = (Spinner) findViewById(R.id.spinner);
         Button creer = (Button) findViewById(R.id.creerTicket);
+        ProgressBar pgsBar = (ProgressBar)findViewById(R.id.progBar);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         List<String> categoriesId = new ArrayList<String>();
         List<String> categoriesSpinner = new ArrayList<String>();
@@ -83,12 +85,14 @@ public class TicketCreation extends AppCompatActivity {
                 {
                     Toast.makeText(TicketCreation.this, "Server Error", Toast.LENGTH_SHORT).show();
                 }
+                pgsBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ResponseCategories> call, Throwable t) {
                 Log.e("Fail : Categories check",t.getMessage());
                 Toast.makeText(TicketCreation.this, "Server is offline", Toast.LENGTH_SHORT).show();
+                pgsBar.setVisibility(View.GONE);
             }
         });
         creer.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +105,7 @@ public class TicketCreation extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // to replace later
                         //finish();
+                        pgsBar.setVisibility(View.VISIBLE);
                         HashMap<String,String> reqBody = new HashMap<>();
                         reqBody.put("cin",cin.getText().toString());
                         reqBody.put("nom",nom.getText().toString());
@@ -122,6 +127,7 @@ public class TicketCreation extends AppCompatActivity {
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
+                                pgsBar.setVisibility(View.GONE);
                                 Intent share = new Intent(Intent.ACTION_SEND);
                                 share.setType("image/*");
                                 share.putExtra(Intent.EXTRA_STREAM, uri);
@@ -131,6 +137,7 @@ public class TicketCreation extends AppCompatActivity {
                             @Override
                             public void onFailure(Call<ResponseBody> call, Throwable t) {
                                 Toast.makeText(TicketCreation.this, "Server Image Error", Toast.LENGTH_SHORT).show();
+                                pgsBar.setVisibility(View.GONE);
                             }
                         });
                     }

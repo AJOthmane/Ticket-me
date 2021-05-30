@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +35,7 @@ public class TicketCheck extends AppCompatActivity {
         TextView ticketCin = (TextView) findViewById(R.id.cin);
         TextView ticketState = (TextView) findViewById(R.id.etat);
         Button validationButton = (Button) findViewById(R.id.valider);
+        ProgressBar pgsBar = (ProgressBar)findViewById(R.id.pBar);
         String code = getIntent().getStringExtra("code");
         ticketNumber.setText(code);
         ticketOwner.setVisibility(View.GONE);
@@ -71,27 +75,42 @@ public class TicketCheck extends AppCompatActivity {
                     ticketState.setText("Ce ticket est inexistant");
                     ticketState.setVisibility(View.VISIBLE);
                 }
+                pgsBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ResponseTicket> call, Throwable t) {
                 Log.e("Fail : ticket check",t.getMessage());
                 Toast.makeText(TicketCheck.this, "Server is offline", Toast.LENGTH_SHORT).show();
+                pgsBar.setVisibility(View.GONE);
             }
         });
         validationButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                pgsBar.setVisibility(View.VISIBLE);
                 Call<Boolean> call = apiInterface.validateTicket(reqBody);
                 call.enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                        pgsBar.setVisibility(View.GONE);
+                        Toast.makeText(TicketCheck.this, "Le ticket a été validé avec succes", Toast.LENGTH_SHORT).show();
+
                         Intent intent = new Intent(getBaseContext(), QrScanner.class);
-                        startActivity(intent);
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startActivity(intent);
+                            }
+                        }, 2000);
+
+                        // wait to show validation
                     }
 
                     @Override
                     public void onFailure(Call<Boolean> call, Throwable t) {
                         Toast.makeText(TicketCheck.this, "Server Error", Toast.LENGTH_SHORT).show();
+                        pgsBar.setVisibility(View.GONE);
                     }
                 });
 
