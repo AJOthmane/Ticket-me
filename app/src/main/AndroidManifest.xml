@@ -18,7 +18,7 @@
         android:requestLegacyExternalStorage="true"
         >
 
-
+        <activity android:name=".activities.Home"></activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBBF0w3TdZL_Hup2XsN_95-RQ_SvF4xfnk" />
@@ -30,10 +30,7 @@
         <activity
             android:name=".activities.ListOfEventsActivity"
             android:label="@string/title_activity_list_of_events"
-            android:theme="@style/Theme.Ticketme.NoActionBar">
-
-
-        </activity>
+            android:theme="@style/Theme.Ticketme.NoActionBar"></activity>
         <activity android:name=".activities.EventActivity" />
         <activity
             android:name=".activities.MapsActivity"
