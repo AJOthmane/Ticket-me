@@ -119,12 +119,13 @@
             app:layout_constraintGuide_begin="114dp" />
 
         <Button
-            app:backgroundTint="@null"
-            android:background="@android:color/holo_red_dark"
             android:id="@+id/button_creation_event_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/holo_red_dark"
             android:text="@string/buttonCreationEvent_next"
+            android:textColor="@color/white"
+            app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

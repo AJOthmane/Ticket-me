@@ -11,6 +11,7 @@ import ma.ensias.ticket_me.requests.RequestCategory;
 import ma.ensias.ticket_me.response.ResponseCategories;
 import ma.ensias.ticket_me.response.ResponseCategory;
 import ma.ensias.ticket_me.response.ResponseEventInfo;
+import ma.ensias.ticket_me.response.ResponseJoin;
 import ma.ensias.ticket_me.response.ResponseListCategory;
 import ma.ensias.ticket_me.response.ResponseListEvents;
 import ma.ensias.ticket_me.response.ResponseLogin;
@@ -63,5 +64,8 @@ public interface APIInterface {
 
     @POST("createticket")
     Call<ResponseBody> createTicket(@Body HashMap<String,String> ticket);
+
+    @POST("joinevent")
+    Call<ResponseJoin> joinevent(@Body HashMap<String,String> event);
 
 }
