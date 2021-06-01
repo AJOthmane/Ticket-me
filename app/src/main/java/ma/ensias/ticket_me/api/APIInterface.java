@@ -7,6 +7,7 @@ import java.util.List;
 
 import ma.ensias.ticket_me.model.CategoryTicket;
 import ma.ensias.ticket_me.model.Event;
+import ma.ensias.ticket_me.model.Ticket;
 import ma.ensias.ticket_me.requests.RequestCategory;
 import ma.ensias.ticket_me.response.ResponseCategories;
 import ma.ensias.ticket_me.response.ResponseCategory;
@@ -67,5 +68,8 @@ public interface APIInterface {
 
     @POST("joinevent")
     Call<ResponseJoin> joinevent(@Body HashMap<String,String> event);
+
+    @POST("stats")
+    Call<LinkedList<Ticket>> getTickets(@Body HashMap<String,Integer> infos);
 
 }

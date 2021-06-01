@@ -86,11 +86,6 @@ public class ListOfEventsActivity extends AppCompatActivity implements Navigatio
                     TabLayout tabs = findViewById(R.id.tabs);
                     tabs.setSelectedTabIndicatorColor(Color.parseColor("#FFFFFF"));
                     tabs.setupWithViewPager(viewPager);
-                    FloatingActionButton fab = findViewById(R.id.create_event);
-                    fab.setOnClickListener(v -> {
-                        Intent intent = new Intent(getApplicationContext(),CreationEvent.class);
-                        startActivity(intent);
-                    });
                 }
             });
         });

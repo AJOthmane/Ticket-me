@@ -42,7 +42,6 @@ public class ListEventsFragment extends Fragment {
     public RecyclerView viewEvents;
     public View v;
 
-
     public ListEventsFragment(boolean admin,int ID_SESSION)  {
         this.admin = admin;
         this.ID_SESSION = ID_SESSION;
