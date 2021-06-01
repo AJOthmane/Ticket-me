@@ -20,12 +20,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.zip.Inflater;
 
+import ma.ensias.ticket_me.Database.DBHandler;
+import ma.ensias.ticket_me.Database.Event;
 import ma.ensias.ticket_me.R;
+import ma.ensias.ticket_me.adpater.AdapterDBEvent;
 import ma.ensias.ticket_me.adpater.AdapterEvent;
 import ma.ensias.ticket_me.api.APIClient;
 import ma.ensias.ticket_me.api.APIInterface;
 import ma.ensias.ticket_me.model.CategoryTicket;
-import ma.ensias.ticket_me.model.Event;
 import ma.ensias.ticket_me.response.ResponseEvent;
 import ma.ensias.ticket_me.response.ResponseListEvents;
 import retrofit2.Call;
@@ -39,7 +41,6 @@ public class ListEventsFragment extends Fragment {
     private int ID_SESSION;
     public RecyclerView viewEvents;
     public View v;
-
 
     public ListEventsFragment(boolean admin,int ID_SESSION)  {
         this.admin = admin;
@@ -65,36 +66,48 @@ public class ListEventsFragment extends Fragment {
 
         APIInterface apiInterface = APIClient.createService(APIInterface.class);
         Call<ResponseListEvents> call_event = null;
-        if(admin)
+        if(admin){
             call_event = apiInterface.getEventadmin(ID_SESSION);
-        else
-            call_event = apiInterface.getEvents();
 
-        call_event.enqueue(new Callback<ResponseListEvents>() {
-            @Override
-            public void onResponse(Call<ResponseListEvents> call, Response<ResponseListEvents> response) {
+            call_event.enqueue(new Callback<ResponseListEvents>() {
+                @Override
+                public void onResponse(Call<ResponseListEvents> call, Response<ResponseListEvents> response) {
 
-                if (response.code() == 200) {
+                    if (response.code() == 200) {
 
-                    viewEvents = v.findViewById(R.id.list_of_events).findViewById(R.id.list_of_events);
-                    viewEvents.addItemDecoration(new DividerItemDecoration(getContext(),
-                            DividerItemDecoration.VERTICAL));
-                    viewEvents.setLayoutManager(new LinearLayoutManager(getContext()));
-                    viewEvents.setAdapter(new AdapterEvent(response.body().getEvents(),getContext()));
-                    progress.dismiss();
+                        viewEvents = v.findViewById(R.id.list_of_events).findViewById(R.id.list_of_events);
+                        viewEvents.addItemDecoration(new DividerItemDecoration(getContext(),
+                                DividerItemDecoration.VERTICAL));
+                        viewEvents.setLayoutManager(new LinearLayoutManager(getContext()));
+                        viewEvents.setAdapter(new AdapterEvent(response.body().getEvents(),getContext()));
+                        progress.dismiss();
 
-                } else {
-                    Log.e("error_event", "code : "+response.code());
+                    } else {
+                        Log.e("error_event", "code : "+response.code());
 
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ResponseListEvents> call, Throwable t) {
-                Log.e("error_event", "Error connexion with api");
-                //viewEvents.setAdapter(new AdapterEvent(new LinkedList<Event>(),getContext()));
-            }
-       });
+                @Override
+                public void onFailure(Call<ResponseListEvents> call, Throwable t) {
+                    Log.e("error_event", "Error connexion with api");
+                    //viewEvents.setAdapter(new AdapterEvent(new LinkedList<Event>(),getContext()));
+                }
+            });
+        }
+        else
+        {
+            //Get Events from local database
+            DBHandler dbHandler = DBHandler.getInstance(this.getContext());
+            List<Event> eventList = dbHandler.eventDao().getEventList();
+
+            viewEvents = v.findViewById(R.id.list_of_events);
+            viewEvents.addItemDecoration(new DividerItemDecoration(getContext(),
+                    DividerItemDecoration.VERTICAL));
+            viewEvents.setLayoutManager(new LinearLayoutManager(getContext()));
+            viewEvents.setAdapter(new AdapterDBEvent(eventList,getContext()));
+            progress.dismiss();
+        }
 
 
         return v;
@@ -113,36 +126,48 @@ public class ListEventsFragment extends Fragment {
 
         APIInterface apiInterface = APIClient.createService(APIInterface.class);
         Call<ResponseListEvents> call_event = null;
-        if(admin)
+        if(admin){
             call_event = apiInterface.getEventadmin(ID_SESSION);
-        else
-            call_event = apiInterface.getEvents();
 
-        call_event.enqueue(new Callback<ResponseListEvents>() {
-            @Override
-            public void onResponse(Call<ResponseListEvents> call, Response<ResponseListEvents> response) {
+            call_event.enqueue(new Callback<ResponseListEvents>() {
+                @Override
+                public void onResponse(Call<ResponseListEvents> call, Response<ResponseListEvents> response) {
 
-                if (response.code() == 200) {
+                    if (response.code() == 200) {
 
-                    viewEvents = v.findViewById(R.id.list_of_events).findViewById(R.id.list_of_events);
-                    viewEvents.addItemDecoration(new DividerItemDecoration(getContext(),
-                            DividerItemDecoration.VERTICAL));
-                    viewEvents.setLayoutManager(new LinearLayoutManager(getContext()));
-                    viewEvents.setAdapter(new AdapterEvent(response.body().getEvents(),getContext()));
-                    progress.dismiss();
+                        viewEvents = v.findViewById(R.id.list_of_events).findViewById(R.id.list_of_events);
+                        viewEvents.addItemDecoration(new DividerItemDecoration(getContext(),
+                                DividerItemDecoration.VERTICAL));
+                        viewEvents.setLayoutManager(new LinearLayoutManager(getContext()));
+                        viewEvents.setAdapter(new AdapterEvent(response.body().getEvents(),getContext()));
+                        progress.dismiss();
 
-                } else {
-                    Log.e("error_event", "code : "+response.code());
+                    } else {
+                        Log.e("error_event", "code : "+response.code());
 
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ResponseListEvents> call, Throwable t) {
-                Log.e("error_event", "Error connexion with api");
-                //viewEvents.setAdapter(new AdapterEvent(new LinkedList<Event>(),getContext()));
-            }
-        });
+                @Override
+                public void onFailure(Call<ResponseListEvents> call, Throwable t) {
+                    Log.e("error_event", "Error connexion with api");
+                    //viewEvents.setAdapter(new AdapterEvent(new LinkedList<Event>(),getContext()));
+                }
+            });
+        }
+        else
+        {
+            //Get Events from local database
+            DBHandler dbHandler = DBHandler.getInstance(this.getContext());
+            List<Event> eventList = dbHandler.eventDao().getEventList();
+
+            viewEvents = v.findViewById(R.id.list_of_events);
+            viewEvents.addItemDecoration(new DividerItemDecoration(getContext(),
+                    DividerItemDecoration.VERTICAL));
+            viewEvents.setLayoutManager(new LinearLayoutManager(getContext()));
+            viewEvents.setAdapter(new AdapterDBEvent(eventList,getContext()));
+            progress.dismiss();
+        }
     }
 
 }

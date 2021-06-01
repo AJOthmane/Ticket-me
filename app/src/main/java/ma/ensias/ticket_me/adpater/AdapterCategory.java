@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.LinkedList;
 
 import ma.ensias.ticket_me.R;
+import ma.ensias.ticket_me.activities.StatsActivity;
 import ma.ensias.ticket_me.model.CategoryTicket;
 
 public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.ViewHolder> {
@@ -22,11 +23,13 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.ViewHo
 
     private final LinkedList<CategoryTicket> categories;
     private final Context context;
+    private final int idEvent;
 
-    public AdapterCategory(LinkedList<CategoryTicket> categories,Context context)
+    public AdapterCategory(int idEvent, LinkedList<CategoryTicket> categories,Context context)
     {
         this.categories = categories;
         this.context = context;
+        this.idEvent = idEvent;
     }
     @NonNull
     @Override
@@ -43,8 +46,10 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.ViewHo
         holder.places.setText(category.getNumberOfPlaces()+" Places");
         holder.price.setText(category.getPrice()+" DH");
         holder.statistics.setOnClickListener(v -> {
-           // Intent i = new Intent()
-           // holder.button_explore.getContext().startActivity(intent)
+            Intent intent = new Intent(v.getContext(), StatsActivity.class);
+            intent.putExtra("id_category", category.getId());
+            intent.putExtra("id_event", idEvent);
+            v.getContext().startActivity(intent);
         });
     }
 

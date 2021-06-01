@@ -105,7 +105,7 @@ public class EventActivity extends AppCompatActivity {
                     if(response.body().getListOfEvents() != null)
                     {
                         categoriesList = response.body();
-                        categories.setAdapter(new AdapterCategory(categoriesList.getListOfEvents(), getApplicationContext()));
+                        categories.setAdapter(new AdapterCategory(idEvent ,categoriesList.getListOfEvents(), getApplicationContext()));
                     }
                 }
                 else
@@ -171,7 +171,7 @@ public class EventActivity extends AppCompatActivity {
                     if(response.body().getListOfEvents() != null)
                     {
                         categoriesList = response.body();
-                        categories.setAdapter(new AdapterCategory(categoriesList.getListOfEvents(), getApplicationContext()));
+                        categories.setAdapter(new AdapterCategory(idEvent ,categoriesList.getListOfEvents(), getApplicationContext()));
                     }
                 }
                 else

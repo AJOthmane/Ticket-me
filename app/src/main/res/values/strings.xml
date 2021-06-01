@@ -60,4 +60,7 @@
     <string name="owner_fname">Prénom</string>
     <string name="tkCreation">create ticket</string>
     <string name="tkValidation">Check Ticket</string>
+
+    <string name="close_drawer_content">Close Menu</string>
+    <string name="open_drawer_content">Open Menu</string>
 </resources>
