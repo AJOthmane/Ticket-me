@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/item1"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/item2"
+            android:title="Events" />
+
+
+    </group>
+
+    <item android:title="App">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/settings"
+                    android:icon="@drawable/settings_icon"
+                    android:title="Settings" />
+
+                <item
+                    android:id="@+id/version"
+                    android:icon="@drawable/info_icon"
+                    android:title="Version" />
+
+            </group>
+        </menu>
+    </item>
+
+</menu>

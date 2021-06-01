@@ -20,8 +20,12 @@ import java.util.HashMap;
 
 import ma.ensias.ticket_me.R;
 import ma.ensias.ticket_me.activities.CreationEvent;
+
+import ma.ensias.ticket_me.activities.Home;
+
 import ma.ensias.ticket_me.activities.ListOfEventsActivity;
 import ma.ensias.ticket_me.activities.MainActivity;
+
 import ma.ensias.ticket_me.api.APIClient;
 import ma.ensias.ticket_me.api.APIInterface;
 import ma.ensias.ticket_me.response.ResponseLogin;
@@ -71,8 +75,8 @@ public class LoginForm extends Fragment {
 
                 APIInterface apiInterface = APIClient.createService(APIInterface.class);
                 HashMap<String,String> cred = new HashMap<>();
-                cred.put(MainActivity.USERNAME_FIELD,usernameText);
-                cred.put(MainActivity.PASSWORD_FIELD,passwordText);
+                cred.put(Home.USERNAME_FIELD,usernameText);
+                cred.put(Home.PASSWORD_FIELD,passwordText);
                 Call<ResponseLogin> call = apiInterface.VerifyLogin(cred);
                 call.enqueue(new Callback<ResponseLogin>() {
                     @Override

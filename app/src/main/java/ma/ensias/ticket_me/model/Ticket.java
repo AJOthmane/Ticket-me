@@ -1,5 +1,7 @@
 package ma.ensias.ticket_me.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public  class Ticket {
@@ -12,6 +14,7 @@ public  class Ticket {
 
     private Date dateOfCreation;
 
+    @SerializedName("date_consumed_ticket")
     private Date dateofConsumed;
 
     private int cinClient;

@@ -25,10 +25,20 @@ public class QrScanner extends AppCompatActivity {
     private static final int CAMERA_REQUEST_CODE = 101;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        if(setupPermission())
+        {
+            codeScanner();
+        }
+
+    }
+
+    private void codeScanner()
+    {
         setContentView(R.layout.activity_qr_scanner);
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
-        setupPermission();
         mCodeScanner = new CodeScanner(this, scannerView);
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
@@ -65,11 +75,16 @@ public class QrScanner extends AppCompatActivity {
         super.onPause();
     }
 
-    private void setupPermission()
+    private boolean setupPermission()
     {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) !=
                 PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,new String[] { Manifest.permission.CAMERA },CAMERA_REQUEST_CODE);
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
     @Override
@@ -79,7 +94,7 @@ public class QrScanner extends AppCompatActivity {
             case CAMERA_REQUEST_CODE:
                 if (grantResults.length > 0 &&
                         grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Success
+                    codeScanner();
                 }  else {
                     Toast.makeText(this,"Vous devez autoriser l'utilisation de la camera",Toast.LENGTH_SHORT);
                 }

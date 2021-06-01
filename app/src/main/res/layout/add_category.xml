@@ -70,13 +70,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/category_price" />
 
-        <Button
-        app:backgroundTint="@null"
-        android:background="@color/green"
+    <Button
         android:id="@+id/button_creation_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/green"
         android:text="@string/button_create"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
