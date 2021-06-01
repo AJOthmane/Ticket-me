@@ -68,7 +68,11 @@ public class ListOfEventsActivity extends AppCompatActivity implements Navigatio
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setSelectedTabIndicatorColor(Color.parseColor("#FFFFFF"));
         tabs.setupWithViewPager(viewPager);
-
+        FloatingActionButton fab = findViewById(R.id.create_event);
+        fab.setOnClickListener(v -> {
+            Intent intent = new Intent(this,CreationEvent.class);
+            startActivity(intent);
+        });
         /******* Join Button *******/
         Button join = findViewById(R.id.joinbtn);
         join.setOnClickListener(v -> {
@@ -86,6 +90,11 @@ public class ListOfEventsActivity extends AppCompatActivity implements Navigatio
                     TabLayout tabs = findViewById(R.id.tabs);
                     tabs.setSelectedTabIndicatorColor(Color.parseColor("#FFFFFF"));
                     tabs.setupWithViewPager(viewPager);
+                    FloatingActionButton fab = findViewById(R.id.create_event);
+                    fab.setOnClickListener(v -> {
+                        Intent intent = new Intent(getApplicationContext(),CreationEvent.class);
+                        startActivity(intent);
+                    });
                 }
             });
         });
@@ -105,7 +114,7 @@ public class ListOfEventsActivity extends AppCompatActivity implements Navigatio
         View header = navigationView.getHeaderView(0);
 
         TextView username = (TextView) header.findViewById(R.id.username);
-        username.setText("Omarirro");
+        username.setText("othmane");
 
         ImageButton arrow_drop = (ImageButton) header.findViewById(R.id.arrow_dropdown);
 
@@ -138,9 +147,6 @@ public class ListOfEventsActivity extends AppCompatActivity implements Navigatio
             case R.id.item2:
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-                break;
-
-            case R.id.item3:
                 break;
 
             case R.id.version:

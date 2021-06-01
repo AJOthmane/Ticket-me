@@ -24,7 +24,7 @@
             android:layout_marginRight="20dp"
             android:fontFamily="@font/aclonica"
             android:paddingTop="10dp"
-            android:text="Omarirro"
+            android:text="othmane"
             android:textColor="@color/white"
             android:textSize="16sp" />
 

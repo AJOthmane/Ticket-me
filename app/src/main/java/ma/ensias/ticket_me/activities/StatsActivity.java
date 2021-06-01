@@ -35,8 +35,8 @@ public class StatsActivity extends AppCompatActivity {
         txtviewtitle = (TextView) findViewById(R.id.title);
         txtviewtitle.setText("VIP");
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
         //Buttons for selection of type of chart
         SegmentedButtonGroup sbg = (SegmentedButtonGroup) findViewById(R.id.segmBtnGrp);

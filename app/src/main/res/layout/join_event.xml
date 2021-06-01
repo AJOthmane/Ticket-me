@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:backgroundTint="@android:color/holo_red_light"
-        android:text="Button"
+        android:text="Join"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"

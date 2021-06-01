@@ -79,7 +79,15 @@ public class ListEventsFragment extends Fragment {
                         viewEvents.addItemDecoration(new DividerItemDecoration(getContext(),
                                 DividerItemDecoration.VERTICAL));
                         viewEvents.setLayoutManager(new LinearLayoutManager(getContext()));
-                        viewEvents.setAdapter(new AdapterEvent(response.body().getEvents(),getContext()));
+                        if(response.body().getEvents() == null)
+                        {
+                            viewEvents.setAdapter(new AdapterEvent(new LinkedList<>(),getContext()));
+                        }
+                        else
+                        {
+                            viewEvents.setAdapter(new AdapterEvent(response.body().getEvents(),getContext()));
+                        }
+
                         progress.dismiss();
 
                     } else {
@@ -139,7 +147,14 @@ public class ListEventsFragment extends Fragment {
                         viewEvents.addItemDecoration(new DividerItemDecoration(getContext(),
                                 DividerItemDecoration.VERTICAL));
                         viewEvents.setLayoutManager(new LinearLayoutManager(getContext()));
-                        viewEvents.setAdapter(new AdapterEvent(response.body().getEvents(),getContext()));
+                        if(response.body().getEvents() == null)
+                        {
+                            viewEvents.setAdapter(new AdapterEvent(new LinkedList<>(),getContext()));
+                        }
+                        else
+                        {
+                            viewEvents.setAdapter(new AdapterEvent(response.body().getEvents(),getContext()));
+                        }
                         progress.dismiss();
 
                     } else {
